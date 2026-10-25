@@ -1,0 +1,9 @@
+<h2>
+    {% if page_obj %}
+        {{ page_obj.paginator.count }}
+        Product{{ page_obj.paginator.count|pluralize }}
+    {% else %}
+        {{ products|length }}
+        Product{{ products|length|pluralize }}
+    {% endif %}
+</h2>
