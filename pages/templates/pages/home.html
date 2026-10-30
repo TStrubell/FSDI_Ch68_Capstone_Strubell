@@ -25,43 +25,59 @@
 
     <div class="home-hero__inner">
 
-        <div class="home-hero__content">
+        <div class="home-hero__layout">
 
-            <p class="eyebrow cinematic-reveal">
-                Strubell Goods &amp; Gear
-            </p>
+            <div class="home-hero__content">
 
-            <h1 class="home-hero__title">
+                <p class="eyebrow cinematic-reveal">
+                    Strubell Goods &amp; Gear
+                </p>
 
-                Quality Gear.
+                <h1 class="home-hero__title">
 
-                <span class="home-hero__title-accent">
-                    Honest Value.
-                </span>
+                    Quality Gear.
 
-            </h1>
+                    <span class="home-hero__title-accent">
+                        Honest Value.
+                    </span>
 
-            <p class="home-hero__summary cinematic-reveal">
-                Discover new and gently used goods selected
-                for usefulness, durability, craftsmanship,
-                and continued service.
-            </p>
+                </h1>
 
-            <div class="home-hero__actions cinematic-reveal">
+                <p class="home-hero__summary cinematic-reveal">
+                    Discover new and gently used goods selected
+                    for usefulness, durability, craftsmanship,
+                    and continued service.
+                </p>
 
-                <a
-                    class="button button--primary"
-                    href="{% url 'catalog:product-list' %}"
+                <div class="home-hero__actions cinematic-reveal">
+
+                    <a
+                        class="button button--primary"
+                        href="{% url 'catalog:product-list' %}"
+                    >
+                        Explore Marketplace
+                    </a>
+
+                    <a
+                        class="button button--secondary"
+                        href="{% url 'pages:about' %}"
+                    >
+                        Discover the SGnG Story
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="home-hero__brand-visual cinematic-reveal">
+
+                <img
+                    class="home-hero__logo"
+                    src="{% static 'images/sgng_brand/SGnG-Logo.png' %}"
+                    alt="Strubell Goods and Gear logo"
+                    width="560"
+                    height="560"
                 >
-                    Explore Marketplace
-                </a>
-
-                <a
-                    class="button button--secondary"
-                    href="{% url 'pages:about' %}"
-                >
-                    Discover the SGnG Story
-                </a>
 
             </div>
 
@@ -77,7 +93,6 @@
     </div>
 
 </section>
-
 
 <!-- =====================================================
      SGnG STORY

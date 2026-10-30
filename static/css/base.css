@@ -287,32 +287,57 @@ main {
     text-decoration: none;
 }
 
-.brand__mark {
-    display: grid;
+.brand__logo {
+    display:
+        block;
 
-    width: 3rem;
-    height: 3rem;
+    width:
+        3.5rem;
 
-    flex-shrink: 0;
+    height:
+        3.5rem;
 
-    place-items: center;
+    flex-shrink:
+        0;
 
-    border: 1px solid var(--color-gold);
-    border-radius: 50%;
+    object-fit:
+        contain;
 
-    color: var(--color-gold);
+    border:
+        1px solid
+        rgba(214, 179, 106, 0.72);
+
+    border-radius:
+        50%;
 
     background:
-        rgba(214, 179, 106, 0.06);
+        var(--color-background);
 
-    font-size: 0.72rem;
-    font-weight: 800;
-
-    letter-spacing: 0.08em;
+    box-shadow:
+        0 0.35rem 1rem
+        rgba(0, 0, 0, 0.32);
 
     transition:
-        color var(--transition-fast),
-        background-color var(--transition-fast);
+        border-color
+        var(--transition-fast),
+        box-shadow
+        var(--transition-fast),
+        transform
+        var(--transition-fast);
+}
+
+.brand:hover .brand__logo,
+.brand:focus-visible .brand__logo {
+    border-color:
+        var(--color-gold-light);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(214, 179, 106, 0.12),
+        var(--shadow-small);
+
+    transform:
+        scale(1.035);
 }
 
 .brand__text {
@@ -322,12 +347,6 @@ main {
     font-weight: 700;
 
     letter-spacing: 0.04em;
-}
-
-.brand:hover .brand__mark,
-.brand:focus-visible .brand__mark {
-    color: var(--color-background);
-    background: var(--color-gold);
 }
 
 

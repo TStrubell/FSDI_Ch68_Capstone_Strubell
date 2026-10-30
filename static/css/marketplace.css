@@ -5,6 +5,15 @@
 
 
 /* =========================================================
+   MARKETPLACE DESIGN TOKENS
+   ========================================================= */
+
+:root {
+    --shadow-hover:
+        0 1.35rem 3.25rem rgba(0, 0, 0, 0.38);
+}
+
+   /* =========================================================
    MARKETPLACE HERO
    ========================================================= */
 
@@ -190,10 +199,15 @@
         box-shadow 200ms ease,
         transform 200ms ease;
 }
-.product-card:hover {
+.product-card:hover,
+.product-card:focus-within {
     border-color: var(--color-gold);
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-2px);
+
+    box-shadow:
+        var(--shadow-hover);
+
+    transform:
+        translateY(-2px);
 }
 
 /* =========================================================
@@ -222,6 +236,51 @@
 }
 
 /* =========================================================
+   MARKETPLACE - TABLET
+   ========================================================= */
+
+@media (max-width: 980px) {
+
+    /*
+     * Convert the wide five-part filter row into a
+     * balanced two-column tablet layout.
+     */
+    .marketplace-filters {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    /*
+     * Allow search to use the full panel width.
+     */
+    .filter-field--search {
+        grid-column:
+            1 / -1;
+    }
+
+    /*
+     * Keep the action area on its own row so the controls
+     * remain readable and do not compress the form fields.
+     */
+    .filter-actions {
+        grid-column:
+            1 / -1;
+
+        justify-content:
+            flex-start;
+    }
+
+    /*
+     * Move the catalog from three columns to two columns.
+     */
+    .product-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+/* =========================================================
    PRODUCT DETAIL - TABLET
    ========================================================= */
 
@@ -244,6 +303,116 @@
 
     .product-detail__placeholder {
         min-height: 22rem;
+    }
+
+}
+
+/* =========================================================
+   MARKETPLACE - MOBILE
+   ========================================================= */
+
+@media (max-width: 680px) {
+
+    /*
+     * Reduce the Marketplace hero spacing while preserving
+     * its cinematic hierarchy.
+     */
+    .marketplace-hero {
+        padding:
+            3.5rem
+            0;
+    }
+
+    .marketplace-hero h1 {
+        font-size:
+            clamp(
+                2.75rem,
+                15vw,
+                4.5rem
+            );
+    }
+
+    /*
+     * Use a single-column filter workflow on mobile.
+     */
+    .marketplace-filters {
+        grid-template-columns:
+            minmax(0, 1fr);
+
+        padding:
+            1rem;
+    }
+
+    .filter-field--search,
+    .filter-actions {
+        grid-column:
+            auto;
+    }
+
+    /*
+     * Stack filter actions and make both actions large,
+     * consistent touch targets.
+     */
+    .filter-actions {
+        flex-direction:
+            column;
+
+        align-items:
+            stretch;
+    }
+
+    .filter-actions .button {
+        width:
+            100%;
+    }
+
+    /*
+     * Collapse the results heading so longer result counts
+     * and supporting content cannot compete for width.
+     */
+    .results-heading {
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+        margin-top:
+            2.25rem;
+    }
+
+    /*
+     * Display one Marketplace card per row.
+     */
+    .product-grid {
+        grid-template-columns:
+            minmax(0, 1fr);
+
+        gap:
+            1.25rem;
+    }
+
+    /*
+     * Avoid hover-based elevation on touch-sized layouts.
+     */
+    .product-card:hover {
+        transform:
+            none;
+    }
+
+    /*
+     * Allow pagination controls to wrap without causing
+     * horizontal page overflow.
+     */
+    .pagination {
+        flex-wrap:
+            wrap;
+
+        justify-content:
+            center;
+
+        text-align:
+            center;
     }
 
 }
