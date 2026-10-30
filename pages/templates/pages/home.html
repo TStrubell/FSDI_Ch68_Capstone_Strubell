@@ -1,0 +1,418 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    Cinematic SGnG Marketplace | Strubell Goods & Gear
+{% endblock %}
+
+
+{% block extra_css %}
+    <link
+        rel="stylesheet"
+        href="{% static 'css/home.css' %}"
+    >
+{% endblock %}
+
+
+{% block content %}
+
+<!-- =====================================================
+     CINEMATIC HERO
+====================================================== -->
+
+<section class="home-hero">
+
+    <div class="home-hero__inner">
+
+        <div class="home-hero__content">
+
+            <p class="eyebrow cinematic-reveal">
+                Strubell Goods &amp; Gear
+            </p>
+
+            <h1 class="home-hero__title">
+
+                Quality Gear.
+
+                <span class="home-hero__title-accent">
+                    Honest Value.
+                </span>
+
+            </h1>
+
+            <p class="home-hero__summary cinematic-reveal">
+                Discover new and gently used goods selected
+                for usefulness, durability, craftsmanship,
+                and continued service.
+            </p>
+
+            <div class="home-hero__actions cinematic-reveal">
+
+                <a
+                    class="button button--primary"
+                    href="{% url 'catalog:product-list' %}"
+                >
+                    Explore Marketplace
+                </a>
+
+                <a
+                    class="button button--secondary"
+                    href="{% url 'pages:about' %}"
+                >
+                    Discover the SGnG Story
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        class="home-hero__scroll"
+        aria-hidden="true"
+    >
+        Explore SGnG
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SGnG STORY
+====================================================== -->
+
+<section
+    id="sgng-story"
+    class="story-section"
+>
+
+    <div class="page-shell">
+
+        <div
+            class="
+                story-section__intro
+                cinematic-reveal
+            "
+        >
+
+            <p class="eyebrow">
+                The SGnG Story
+            </p>
+
+            <h2>
+                Built from experience.
+                Designed for what comes next.
+            </h2>
+
+            <p>
+                Strubell Goods &amp; Gear brings together
+                service, craftsmanship, entrepreneurship,
+                and software development to create a
+                marketplace centered on practical products,
+                honest value, and continued usefulness.
+            </p>
+
+        </div>
+
+
+        <div class="story-grid">
+
+            <article
+                class="
+                    story-card
+                    cinematic-reveal
+                "
+            >
+
+                <span class="story-card__number">
+                    01
+                </span>
+
+                <h3>
+                    🎖️ Military Service
+                </h3>
+
+                <p>
+                    Experience shaped by responsibility,
+                    preparedness, reliability, and service
+                    provides part of the foundation behind
+                    the SGnG identity.
+                </p>
+
+            </article>
+
+
+            <article
+                class="
+                    story-card
+                    cinematic-reveal
+                "
+            >
+
+                <span class="story-card__number">
+                    02
+                </span>
+
+                <h3>
+                    🧰 Craftsmanship
+                </h3>
+
+                <p>
+                    SGnG values durable materials,
+                    practical construction, useful design,
+                    and products capable of continued
+                    service.
+                </p>
+
+            </article>
+
+
+            <article
+                class="
+                    story-card
+                    cinematic-reveal
+                "
+            >
+
+                <span class="story-card__number">
+                    03
+                </span>
+
+                <h3>
+                    💼 Entrepreneurship
+                </h3>
+
+                <p>
+                    The marketplace connects responsible
+                    resale, practical value, product
+                    presentation, and the continuing
+                    development of Strubell Goods &amp; Gear.
+                </p>
+
+            </article>
+
+
+            <article
+                class="
+                    story-card
+                    cinematic-reveal
+                "
+            >
+
+                <span class="story-card__number">
+                    04
+                </span>
+
+                <h3>
+                    💻 Software Development
+                </h3>
+
+                <p>
+                    Full-stack development brings the SGnG
+                    concept into a responsive marketplace
+                    powered by Django, Python, databases,
+                    JavaScript, and modern web technologies.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FEATURED PRODUCTS
+====================================================== -->
+
+<section class="featured-products">
+
+    <div class="page-shell">
+
+        <div
+            class="
+                featured-products__heading
+                cinematic-reveal
+            "
+        >
+
+            <div>
+
+                <p class="eyebrow">
+                    Featured Products
+                </p>
+
+                <h2>
+                    Selected from the Marketplace
+                </h2>
+
+            </div>
+
+            <p class="featured-products__intro">
+                Explore featured SGnG products selected from
+                the current marketplace inventory.
+            </p>
+
+        </div>
+
+
+        {% if featured_products %}
+
+            <div class="featured-grid">
+
+                {% for product in featured_products %}
+
+                    <article
+                        class="
+                            featured-card
+                            cinematic-reveal
+                        "
+                    >
+
+                        <a
+                            class="featured-card__media"
+                            href="{{ product.get_absolute_url }}"
+                            aria-label="View {{ product.name }}"
+                        >
+
+                            {% if product.image %}
+
+                                <img
+                                    class="featured-card__image"
+                                    src="{{ product.image.url }}"
+                                    alt="{{ product.name }}"
+                                >
+
+                            {% else %}
+
+                                <div
+                                    class="featured-card__placeholder"
+                                    aria-hidden="true"
+                                >
+                                    SGnG
+                                </div>
+
+                            {% endif %}
+
+                        </a>
+
+
+                        <div class="featured-card__body">
+
+                            <span class="featured-card__condition">
+                                {{ product.get_condition_display }}
+                            </span>
+
+                            <h3>
+
+                                <a href="{{ product.get_absolute_url }}">
+                                    {{ product.name }}
+                                </a>
+
+                            </h3>
+
+                            <p class="featured-card__description">
+                                {{ product.description|truncatewords:20 }}
+                            </p>
+
+                            <p class="featured-card__price">
+                                ${{ product.sgng_price }}
+                            </p>
+
+                            <a
+                                class="button button--primary button--full"
+                                href="{{ product.get_absolute_url }}"
+                            >
+                                View Product
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <h3>
+                    Featured products coming soon.
+                </h3>
+
+                <a
+                    class="button button--primary"
+                    href="{% url 'catalog:product-list' %}"
+                >
+                    Browse Marketplace
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MARKETPLACE CTA
+====================================================== -->
+
+<section class="home-marketplace-cta">
+
+    <div class="page-shell">
+
+        <div
+            class="
+                home-marketplace-cta__content
+                cinematic-reveal
+            "
+        >
+
+            <p class="eyebrow">
+                Explore SGnG
+            </p>
+
+            <h2>
+                Every product has more life to give.
+            </h2>
+
+            <p>
+                Browse the Cinematic SGnG Marketplace for
+                new and gently used goods, transparent
+                pricing, product condition, availability,
+                and potential savings.
+            </p>
+
+            <a
+                class="button button--primary"
+                href="{% url 'catalog:product-list' %}"
+            >
+                Shop the Marketplace
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+    <script
+        src="{% static 'js/cinematic.js' %}"
+        defer
+    ></script>
+
+{% endblock %}

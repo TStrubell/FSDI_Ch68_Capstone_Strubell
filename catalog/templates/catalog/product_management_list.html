@@ -1,0 +1,409 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    Product Management | SGnG Staff
+{% endblock %}
+
+
+{% block extra_css %}
+    <link
+        rel="stylesheet"
+        href="{% static 'css/forms.css' %}"
+    >
+{% endblock %}
+
+
+{% block content %}
+
+<section class="form-page">
+
+    <div class="page-shell">
+
+        <header class="form-page__header">
+
+            <p class="eyebrow">
+                Staff / Administration
+            </p>
+
+            <h1>
+                Product Management
+            </h1>
+
+            <p class="form-page__summary">
+                Create, update, delete, and monitor
+                Cinematic SGnG Marketplace products,
+                inventory, categories, and availability.
+            </p>
+
+        </header>
+
+
+        <!-- =============================================
+             MANAGEMENT SUMMARY
+        ============================================== -->
+
+        <div class="management-summary">
+
+            <article class="management-stat">
+
+                <span>
+                    Total Products
+                </span>
+
+                <strong>
+                    {{ total_products }}
+                </strong>
+
+            </article>
+
+
+            <article class="management-stat">
+
+                <span>
+                    Active Products
+                </span>
+
+                <strong>
+                    {{ active_products }}
+                </strong>
+
+            </article>
+
+
+            <article class="management-stat">
+
+                <span>
+                    Out of Stock
+                </span>
+
+                <strong>
+                    {{ out_of_stock_products }}
+                </strong>
+
+            </article>
+
+
+            <article class="management-stat">
+
+                <span>
+                    Categories
+                </span>
+
+                <strong>
+                    {{ category_count }}
+                </strong>
+
+            </article>
+
+        </div>
+
+
+        <!-- =============================================
+             MANAGEMENT ACTIONS
+        ============================================== -->
+
+        <div class="management-actions">
+
+            <a
+                class="button button--primary"
+                href="{% url 'catalog:product-create' %}"
+            >
+                + Create Product
+            </a>
+
+            <a
+                class="button button--secondary"
+                href="{% url 'admin:catalog_product_changelist' %}"
+            >
+                Inventory Management
+            </a>
+
+            <a
+                class="button button--secondary"
+                href="{% url 'admin:catalog_category_changelist' %}"
+            >
+                Category Management
+            </a>
+
+            <a
+                class="button button--secondary"
+                href="{% url 'catalog:product-list' %}"
+            >
+                Public Marketplace
+            </a>
+
+        </div>
+
+
+        <!-- =============================================
+             SEARCH / STATUS FILTER
+        ============================================== -->
+
+        <form
+            class="management-filters"
+            method="get"
+        >
+
+            <div class="form-field">
+
+                <label for="management-search">
+                    Search
+                </label>
+
+                <input
+                    id="management-search"
+                    type="search"
+                    name="q"
+                    value="{{ current_search }}"
+                    placeholder="Search products or categories"
+                >
+
+            </div>
+
+
+            <div class="form-field">
+
+                <label for="management-status">
+                    Status
+                </label>
+
+                <select
+                    id="management-status"
+                    name="status"
+                >
+                    <option value="">
+                        All Products
+                    </option>
+
+                    <option
+                        value="active"
+                        {% if current_status == "active" %}
+                            selected
+                        {% endif %}
+                    >
+                        Active
+                    </option>
+
+                    <option
+                        value="inactive"
+                        {% if current_status == "inactive" %}
+                            selected
+                        {% endif %}
+                    >
+                        Inactive
+                    </option>
+
+                    <option
+                        value="out_of_stock"
+                        {% if current_status == "out_of_stock" %}
+                            selected
+                        {% endif %}
+                    >
+                        Out of Stock
+                    </option>
+
+                    <option
+                        value="featured"
+                        {% if current_status == "featured" %}
+                            selected
+                        {% endif %}
+                    >
+                        Featured
+                    </option>
+                </select>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    class="button button--primary"
+                    type="submit"
+                >
+                    Apply
+                </button>
+
+                <a
+                    class="button button--secondary"
+                    href="{% url 'catalog:product-management' %}"
+                >
+                    Clear
+                </a>
+
+            </div>
+
+        </form>
+
+
+        <!-- =============================================
+             PRODUCT TABLE
+        ============================================== -->
+
+        <div class="management-table-wrapper">
+
+            <table class="management-table">
+
+                <thead>
+
+                    <tr>
+                        <th scope="col">
+                            Product
+                        </th>
+
+                        <th scope="col">
+                            Category
+                        </th>
+
+                        <th scope="col">
+                            Price
+                        </th>
+
+                        <th scope="col">
+                            Inventory
+                        </th>
+
+                        <th scope="col">
+                            Status
+                        </th>
+
+                        <th scope="col">
+                            Actions
+                        </th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for product in products %}
+
+                        <tr>
+
+                            <td data-label="Product">
+
+                                <strong>
+                                    {{ product.name }}
+                                </strong>
+
+                                <small>
+                                    {{ product.get_condition_display }}
+                                </small>
+
+                            </td>
+
+
+                            <td data-label="Category">
+                                {{ product.category.name }}
+                            </td>
+
+
+                            <td data-label="Price">
+                                ${{ product.sgng_price }}
+                            </td>
+
+
+                            <td data-label="Inventory">
+
+                                {% if product.inventory_quantity > 0 %}
+
+                                    <span class="status-success">
+                                        {{ product.inventory_quantity }}
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="status-danger">
+                                        Out of Stock
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td data-label="Status">
+
+                                {% if product.active %}
+
+                                    <span class="status-success">
+                                        Active
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="status-muted">
+                                        Inactive
+                                    </span>
+
+                                {% endif %}
+
+                                {% if product.featured %}
+
+                                    <span class="status-featured">
+                                        Featured
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td data-label="Actions">
+
+                                <div class="table-actions">
+
+                                    <a
+                                        href="{{ product.get_absolute_url }}"
+                                    >
+                                        View
+                                    </a>
+
+                                    <a
+                                        href="{% url 'catalog:product-update' product.slug %}"
+                                    >
+                                        Edit
+                                    </a>
+
+                                    <a
+                                        class="danger-link"
+                                        href="{% url 'catalog:product-delete' product.slug %}"
+                                    >
+                                        Delete
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    {% empty %}
+
+                        <tr>
+
+                            <td colspan="6">
+
+                                No products matched the
+                                selected criteria.
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

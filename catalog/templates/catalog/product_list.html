@@ -1,9 +1,480 @@
-<h2>
-    {% if page_obj %}
-        {{ page_obj.paginator.count }}
-        Product{{ page_obj.paginator.count|pluralize }}
-    {% else %}
-        {{ products|length }}
-        Product{{ products|length|pluralize }}
-    {% endif %}
-</h2>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Marketplace | Cinematic SGnG
+{% endblock %}
+
+{% block extra_css %}
+    <link
+        rel="stylesheet"
+        href="{% static 'css/marketplace.css' %}"
+    >
+{% endblock %}
+
+{% block content %}
+
+<!-- =====================================================
+     MARKETPLACE HERO
+====================================================== -->
+<section class="marketplace-hero">
+    <div class="page-shell">
+
+        <p class="eyebrow">
+            Strubell Goods &amp; Gear
+        </p>
+
+        <h1>
+            Marketplace
+        </h1>
+
+        <p class="marketplace-hero__summary">
+            Browse new and gently used goods selected for
+            quality, practical value, and continued service.
+        </p>
+
+    </div>
+</section>
+
+
+<!-- =====================================================
+     MARKETPLACE CONTENT
+====================================================== -->
+<section class="marketplace-content">
+    <div class="page-shell">
+
+        <!-- =============================================
+             SEARCH / FILTER CONTROLS
+        ============================================== -->
+        <form
+            class="marketplace-filters"
+            method="get"
+            action="{% url 'catalog:product-list' %}"
+        >
+
+            <!-- Search -->
+            <div class="filter-field filter-field--search">
+
+                <label for="marketplace-search">
+                    Search Products
+                </label>
+
+                <input
+                    id="marketplace-search"
+                    name="q"
+                    type="search"
+                    value="{{ current_search }}"
+                    placeholder="Search products or categories"
+                >
+
+            </div>
+
+
+            <!-- Category -->
+            <div class="filter-field">
+
+                <label for="category-filter">
+                    Category
+                </label>
+
+                <select
+                    id="category-filter"
+                    name="category"
+                >
+
+                    <option value="">
+                        All Categories
+                    </option>
+
+                    {% for category in categories %}
+
+                        <option
+                            value="{{ category.slug }}"
+                            {% if current_category == category.slug %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ category.display_name }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- Condition -->
+            <div class="filter-field">
+
+                <label for="condition-filter">
+                    Condition
+                </label>
+
+                <select
+                    id="condition-filter"
+                    name="condition"
+                >
+
+                    <option value="">
+                        All Conditions
+                    </option>
+
+                    {% for value, label in condition_choices %}
+
+                        <option
+                            value="{{ value }}"
+                            {% if current_condition == value %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ label }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- Sort -->
+            <div class="filter-field">
+
+                <label for="sort-filter">
+                    Sort By
+                </label>
+
+                <select
+                    id="sort-filter"
+                    name="sort"
+                >
+
+                    <option
+                        value="featured"
+                        {% if current_sort == "featured" %}
+                            selected
+                        {% endif %}
+                    >
+                        Featured
+                    </option>
+
+                    <option
+                        value="newest"
+                        {% if current_sort == "newest" %}
+                            selected
+                        {% endif %}
+                    >
+                        Newest
+                    </option>
+
+                    <option
+                        value="price_low"
+                        {% if current_sort == "price_low" %}
+                            selected
+                        {% endif %}
+                    >
+                        Price: Low to High
+                    </option>
+
+                    <option
+                        value="price_high"
+                        {% if current_sort == "price_high" %}
+                            selected
+                        {% endif %}
+                    >
+                        Price: High to Low
+                    </option>
+
+                    <option
+                        value="name"
+                        {% if current_sort == "name" %}
+                            selected
+                        {% endif %}
+                    >
+                        Product Name
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Filter Buttons -->
+            <div class="filter-actions">
+
+                <button
+                    class="button button--primary"
+                    type="submit"
+                >
+                    Apply Filters
+                </button>
+
+                <a
+                    class="button button--secondary"
+                    href="{% url 'catalog:product-list' %}"
+                >
+                    Clear
+                </a>
+
+            </div>
+
+        </form>
+
+
+        <!-- =============================================
+             RESULTS
+        ============================================== -->
+        <div class="results-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    Available Inventory
+                </p>
+
+                <h2>
+                    {% if page_obj %}
+                        {{ page_obj.paginator.count }}
+                        Product{{ page_obj.paginator.count|pluralize }}
+                    {% else %}
+                        {{ products|length }}
+                        Product{{ products|length|pluralize }}
+                    {% endif %}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- =============================================
+             PRODUCT GRID
+        ============================================== -->
+        {% if products %}
+
+            <div class="product-grid">
+
+                {% for product in products %}
+
+                    <article class="product-card">
+
+                        <!-- Product Image -->
+                        <a
+                            class="product-card__image-link"
+                            href="{{ product.get_absolute_url }}"
+                            aria-label="View {{ product.name }}"
+                        >
+
+                            {% if product.image %}
+
+                                <img
+                                    class="product-card__image"
+                                    src="{{ product.image.url }}"
+                                    alt="{{ product.name }}"
+                                >
+
+                            {% else %}
+
+                                <div
+                                    class="product-card__placeholder"
+                                    aria-hidden="true"
+                                >
+                                    SGnG
+                                </div>
+
+                            {% endif %}
+
+                        </a>
+
+
+                        <!-- Product Information -->
+                        <div class="product-card__body">
+
+                            <!-- Badges -->
+                            <div class="product-card__badges">
+
+                                <span class="badge">
+                                    {{ product.get_condition_display }}
+                                </span>
+
+                                {% if product.featured %}
+
+                                    <span class="badge badge--featured">
+                                        Featured
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- Category -->
+                            <p class="product-card__category">
+                                {{ product.category.name }}
+                            </p>
+
+
+                            <!-- Name -->
+                            <h3>
+
+                                <a href="{{ product.get_absolute_url }}">
+                                    {{ product.name }}
+                                </a>
+
+                            </h3>
+
+
+                            <!-- Description -->
+                            <p class="product-card__description">
+                                {{ product.description|truncatewords:18 }}
+                            </p>
+
+
+                            <!-- Pricing -->
+                            <div class="product-card__pricing">
+
+                                <span class="product-card__price">
+                                    ${{ product.sgng_price }}
+                                </span>
+
+                                {% if product.reference_price %}
+
+                                    <span class="product-card__reference">
+                                        Reference:
+                                        ${{ product.reference_price }}
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- Savings -->
+                            {% if product.savings_amount > 0 %}
+
+                                <p class="product-card__savings">
+                                    Save
+                                    ${{ product.savings_amount }}
+                                    ({{ product.savings_percentage }}%)
+                                </p>
+
+                            {% endif %}
+
+
+                            <!-- Inventory -->
+                            <p
+                                class="
+                                    availability
+                                    {% if product.is_available %}
+                                        availability--available
+                                    {% else %}
+                                        availability--unavailable
+                                    {% endif %}
+                                "
+                            >
+
+                                {% if product.is_available %}
+
+                                    In Stock:
+                                    {{ product.inventory_quantity }}
+
+                                {% else %}
+
+                                    Currently Unavailable
+
+                                {% endif %}
+
+                            </p>
+
+
+                            <!-- Product Detail -->
+                            <a
+                                class="button button--primary button--full"
+                                href="{{ product.get_absolute_url }}"
+                            >
+                                View Details
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+
+        <!-- =============================================
+             EMPTY SEARCH STATE
+        ============================================== -->
+        {% else %}
+
+            <div class="empty-state">
+
+                <h2>
+                    No Products Found
+                </h2>
+
+                <p>
+                    No products match the current search
+                    or filter selections.
+                </p>
+
+                <a
+                    class="button button--primary"
+                    href="{% url 'catalog:product-list' %}"
+                >
+                    View All Products
+                </a>
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- =============================================
+             PAGINATION
+        ============================================== -->
+        {% if is_paginated %}
+
+            <nav
+                class="pagination"
+                aria-label="Marketplace pagination"
+            >
+
+                {% if page_obj.has_previous %}
+
+                    <a
+                        href="?q={{ current_search|urlencode }}&category={{ current_category|urlencode }}&condition={{ current_condition|urlencode }}&sort={{ current_sort|urlencode }}&page={{ page_obj.previous_page_number }}"
+                    >
+                        Previous
+                    </a>
+
+                {% endif %}
+
+
+                <span>
+                    Page {{ page_obj.number }}
+                    of {{ page_obj.paginator.num_pages }}
+                </span>
+
+
+                {% if page_obj.has_next %}
+
+                    <a
+                        href="?q={{ current_search|urlencode }}&category={{ current_category|urlencode }}&condition={{ current_condition|urlencode }}&sort={{ current_sort|urlencode }}&page={{ page_obj.next_page_number }}"
+                    >
+                        Next
+                    </a>
+
+                {% endif %}
+
+            </nav>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

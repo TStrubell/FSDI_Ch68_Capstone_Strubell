@@ -1,0 +1,381 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    {% if object %}
+        Update {{ object.name }} | SGnG Staff
+    {% else %}
+        Create Product | SGnG Staff
+    {% endif %}
+{% endblock %}
+
+
+{% block extra_css %}
+    <link
+        rel="stylesheet"
+        href="{% static 'css/forms.css' %}"
+    >
+{% endblock %}
+
+
+{% block content %}
+
+<section class="form-page">
+
+    <div class="page-shell">
+
+        <!-- =================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <header class="form-page__header">
+
+            <p class="eyebrow">
+                Staff / Administration
+            </p>
+
+            {% if object %}
+
+                <h1>
+                    Update Product
+                </h1>
+
+                <p class="form-page__summary">
+                    Update the marketplace record for
+                    <strong>{{ object.name }}</strong>.
+                    Changes saved here will update the
+                    information displayed throughout the
+                    Cinematic SGnG Marketplace.
+                </p>
+
+            {% else %}
+
+                <h1>
+                    Create Product
+                </h1>
+
+                <p class="form-page__summary">
+                    Add a new product to the Cinematic SGnG
+                    Marketplace with its category, condition,
+                    pricing, inventory, image, and supporting
+                    product information.
+                </p>
+
+            {% endif %}
+
+        </header>
+
+
+        <!-- =================================================
+             PRODUCT MANAGEMENT LAYOUT
+        ================================================== -->
+
+        <div class="form-layout">
+
+
+            <!-- =============================================
+                 PRODUCT FORM
+            ============================================== -->
+
+            <div class="form-panel">
+
+                <form
+                    method="post"
+                    enctype="multipart/form-data"
+                    class="sgng-form"
+                    novalidate
+                >
+
+                    {% csrf_token %}
+
+
+                    <!-- =====================================
+                         NON-FIELD ERRORS
+                    ====================================== -->
+
+                    {% if form.non_field_errors %}
+
+                        <div
+                            class="form-alert form-alert--error"
+                            role="alert"
+                        >
+
+                            <strong>
+                                Please correct the following:
+                            </strong>
+
+                            {% for error in form.non_field_errors %}
+
+                                <p>
+                                    {{ error }}
+                                </p>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- =====================================
+                         FORM FIELDS
+                    ====================================== -->
+
+                    {% for field in form %}
+
+                        <div class="form-field">
+
+                            <!-- Field Label -->
+
+                            <label for="{{ field.id_for_label }}">
+
+                                {{ field.label }}
+
+                                {% if field.field.required %}
+
+                                    <span
+                                        class="required-marker"
+                                        aria-hidden="true"
+                                    >
+                                        *
+                                    </span>
+
+                                    <span class="sr-only">
+                                        required
+                                    </span>
+
+                                {% endif %}
+
+                            </label>
+
+
+                            <!-- Current Product Image -->
+
+                            {% if field.name == "image" and object.image %}
+
+                                <div class="current-product-image">
+
+                                    <p class="form-help">
+                                        Current product image:
+                                    </p>
+
+                                    <img
+                                        class="current-product-image__preview"
+                                        src="{{ object.image.url }}"
+                                        alt="Current image for {{ object.name }}"
+                                    >
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <!-- Django Form Widget -->
+
+                            {{ field }}
+
+
+                            <!-- Help Text -->
+
+                            {% if field.help_text %}
+
+                                <div class="form-help">
+                                    {{ field.help_text|safe }}
+                                </div>
+
+                            {% endif %}
+
+
+                            <!-- Field Errors -->
+
+                            {% if field.errors %}
+
+                                <div
+                                    class="form-errors"
+                                    role="alert"
+                                >
+
+                                    {% for error in field.errors %}
+
+                                        <p>
+                                            {{ error }}
+                                        </p>
+
+                                    {% endfor %}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endfor %}
+
+
+                    <!-- =====================================
+                         FORM ACTIONS
+                    ====================================== -->
+
+                    <div class="form-actions">
+
+                        <button
+                            class="button button--primary"
+                            type="submit"
+                        >
+
+                            {% if object %}
+                                Save Changes
+                            {% else %}
+                                Create Product
+                            {% endif %}
+
+                        </button>
+
+
+                        {% if object %}
+
+                            <a
+                                class="button button--secondary"
+                                href="{{ object.get_absolute_url }}"
+                            >
+                                Cancel
+                            </a>
+
+                        {% else %}
+
+                            <a
+                                class="button button--secondary"
+                                href="{% url 'catalog:product-list' %}"
+                            >
+                                Cancel
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- =============================================
+                 PRODUCT MANAGEMENT INFORMATION
+            ============================================== -->
+
+            <aside class="form-support">
+
+                <p class="eyebrow">
+                    Product Management
+                </p>
+
+
+                {% if object %}
+
+                    <h2>
+                        Edit Marketplace Record
+                    </h2>
+
+                    <p>
+                        Update product information including
+                        its description, condition, pricing,
+                        reference information, inventory,
+                        featured status, active status, or
+                        product photograph.
+                    </p>
+
+                {% else %}
+
+                    <h2>
+                        Add Marketplace Inventory
+                    </h2>
+
+                    <p>
+                        Create a complete marketplace record
+                        containing the product's category,
+                        description, condition, pricing,
+                        inventory, availability, and
+                        presentation information.
+                    </p>
+
+                {% endif %}
+
+
+                <div class="form-support__guidance">
+
+                    <h3>
+                        Product Guidelines
+                    </h3>
+
+                    <ul>
+                        <li>
+                            Use an accurate and descriptive
+                            product name.
+                        </li>
+
+                        <li>
+                            Select the appropriate product
+                            category and condition.
+                        </li>
+
+                        <li>
+                            Enter the current SGnG price.
+                        </li>
+
+                        <li>
+                            Enter a reference price only when
+                            an appropriate comparison exists.
+                        </li>
+
+                        <li>
+                            Keep inventory quantity current.
+                        </li>
+
+                        <li>
+                            Product photographs should
+                            accurately represent the item and
+                            its current condition.
+                        </li>
+
+                        <li>
+                            Mark a product as Featured only
+                            when it should appear in the
+                            Homepage Featured Products
+                            section.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                {% if object %}
+
+                    <a
+                        class="button button--secondary button--full"
+                        href="{{ object.get_absolute_url }}"
+                    >
+                        View Product
+                    </a>
+
+                {% else %}
+
+                    <a
+                        class="button button--secondary button--full"
+                        href="{% url 'catalog:product-list' %}"
+                    >
+                        View Marketplace
+                    </a>
+
+                {% endif %}
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

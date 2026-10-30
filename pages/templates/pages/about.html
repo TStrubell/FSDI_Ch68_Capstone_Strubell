@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    About SGnG | Cinematic SGnG Marketplace
+{% endblock %}
+
+
+{% block extra_css %}
+    <link
+        rel="stylesheet"
+        href="{% static 'css/home.css' %}"
+    >
+{% endblock %}
+
+
+{% block content %}
+
+<section class="story-section">
+
+    <div class="page-shell">
+
+        <div class="story-section__intro">
+
+            <p class="eyebrow">
+                About Strubell Goods &amp; Gear
+            </p>
+
+            <h1>
+                The SGnG Story
+            </h1>
+
+            <p>
+                Strubell Goods &amp; Gear combines practical
+                experience, craftsmanship, entrepreneurship,
+                and software development into a marketplace
+                designed around useful products and honest
+                value.
+            </p>
+
+        </div>
+
+
+        <div class="story-grid">
+
+            <article class="story-card">
+
+                <span class="story-card__number">
+                    01
+                </span>
+
+                <h2>
+                    🎖️ Military Service
+                </h2>
+
+                <p>
+                    Service and experience contribute to an
+                    emphasis on preparedness, responsibility,
+                    reliability, and practical purpose.
+                </p>
+
+            </article>
+
+
+            <article class="story-card">
+
+                <span class="story-card__number">
+                    02
+                </span>
+
+                <h2>
+                    🧰 Craftsmanship
+                </h2>
+
+                <p>
+                    Craftsmanship brings attention to useful
+                    design, durability, thoughtful
+                    construction, and the continued value of
+                    well-made goods.
+                </p>
+
+            </article>
+
+
+            <article class="story-card">
+
+                <span class="story-card__number">
+                    03
+                </span>
+
+                <h2>
+                    💼 Entrepreneurship
+                </h2>
+
+                <p>
+                    SGnG provides a practical foundation for
+                    presenting, organizing, and offering
+                    products through an evolving digital
+                    marketplace.
+                </p>
+
+            </article>
+
+
+            <article class="story-card">
+
+                <span class="story-card__number">
+                    04
+                </span>
+
+                <h2>
+                    💻 Software Development
+                </h2>
+
+                <p>
+                    The Cinematic SGnG Marketplace applies
+                    full-stack development concepts to create
+                    a responsive application connecting
+                    customers, products, data, and
+                    administrative functionality.
+                </p>
+
+            </article>
+
+        </div>
+
+
+        <div class="home-hero__actions">
+
+            <a
+                class="button button--primary"
+                href="{% url 'catalog:product-list' %}"
+            >
+                Explore Marketplace
+            </a>
+
+            <a
+                class="button button--secondary"
+                href="{% url 'pages:home' %}"
+            >
+                Return Home
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

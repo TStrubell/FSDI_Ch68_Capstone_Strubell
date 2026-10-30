@@ -87,7 +87,7 @@
                 class="primary-navigation"
                 aria-label="Primary navigation"
             >
-                <a href="/">
+                <a href="{% url 'pages:home' %}">
                     Home
                 </a>
 
@@ -95,22 +95,49 @@
                     Marketplace
                 </a>
 
-                <a href="/about/">
+                <a href="{% url 'pages:about' %}">
                     About
                 </a>
 
-                <a href="/contact/">
+                <a href="{% url 'contact:contact' %}">
                     Contact
                 </a>
 
                 {% if user.is_authenticated %}
-                    <a href="/accounts/logout/">
-                        Logout
-                    </a>
+
+                    <form
+                        method="post"
+                        action="{% url 'accounts:logout' %}"
+                        class="nav-logout-form"
+                    >
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            class="nav-logout-button"
+                        >
+                            Logout
+                        </button>
+                    </form>
+
                 {% else %}
-                    <a href="/accounts/login/">
-                        Account
+
+                    <a href="{% url 'accounts:login' %}">
+                        Login
                     </a>
+
+                    <a href="{% url 'accounts:register' %}">
+                        Register
+                    </a>
+
+                {% endif %}
+
+                {% if user.is_staff %}
+
+                    <a href="{% url 'catalog:product-management' %}">
+                        Staff / Admin
+                    </a>
+
                 {% endif %}
             </nav>
 
@@ -181,8 +208,13 @@
     </footer>
 
     <!-- =====================================================
-         SGnG JAVASCRIPT
+        GLOBAL SGnG JAVASCRIPT
     ====================================================== -->
+
+    <script
+        src="{% static 'js/main.js' %}"
+        defer
+    ></script>
 
     <script
         src="{% static 'js/navigation.js' %}"

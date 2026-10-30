@@ -21,11 +21,23 @@ from django.urls import include, path
 
 
 urlpatterns = [
+    # Django Administration
     path("admin/", admin.site.urls),
+
+    # Core SGnG Pages
     path("", include("pages.urls")),
+
+    # Core SGnG Marketplace
     path("marketplace/", include("catalog.urls")),
+
+    # User Accounts
     path("accounts/", include("accounts.urls")),
+
+    # Contact Form
     path("contact/", include("contact.urls")),
+
+    # SGnG Catalog API
+    path("api/catalog/", include("catalog.api_urls")),
 ]
 
 

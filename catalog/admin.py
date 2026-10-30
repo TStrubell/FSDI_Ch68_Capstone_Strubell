@@ -30,6 +30,13 @@ class CategoryAdmin(admin.ModelAdmin):
         "updated_at",
     )
 
+    @admin.display(
+        description="Category",
+        ordering="name",
+    )
+    def category_display(self, obj):
+        return obj.display_name
+
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):

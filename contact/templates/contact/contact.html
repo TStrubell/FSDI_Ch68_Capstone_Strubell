@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    Contact | Cinematic SGnG Marketplace
+{% endblock %}
+
+
+{% block extra_css %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/forms.css' %}"
+    >
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="form-page">
+
+    <div class="page-shell">
+
+        <div class="form-page__layout">
+
+
+            <!-- =========================================
+                 CONTACT INTRODUCTION
+            ========================================== -->
+
+            <div class="form-page__intro">
+
+                <p class="eyebrow">
+                    Contact SGnG
+                </p>
+
+                <h1>
+                    Let's start a conversation.
+                </h1>
+
+                <p class="form-page__intro-text">
+                    Have a question about a marketplace
+                    product, product condition, availability,
+                    or Strubell Goods &amp; Gear? Use the
+                    contact form and provide the details
+                    needed to understand the inquiry.
+                </p>
+
+
+                <div class="contact-details">
+
+                    <div class="contact-detail">
+
+                        <span class="contact-detail__label">
+                            Product Questions
+                        </span>
+
+                        <p>
+                            Ask about product details,
+                            condition, pricing, or
+                            availability.
+                        </p>
+
+                    </div>
+
+
+                    <div class="contact-detail">
+
+                        <span class="contact-detail__label">
+                            General Inquiries
+                        </span>
+
+                        <p>
+                            Contact SGnG regarding the
+                            marketplace, brand, or other
+                            general questions.
+                        </p>
+
+                    </div>
+
+
+                    <div class="contact-detail">
+
+                        <span class="contact-detail__label">
+                            Current Phase
+                        </span>
+
+                        <p>
+                            The Phase I marketplace contact
+                            form records the communication
+                            workflow without requiring
+                            e-commerce checkout or order
+                            support.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================================
+                 CONTACT FORM
+            ========================================== -->
+
+            <form
+                method="post"
+                class="sgng-form"
+                novalidate
+            >
+
+                {% csrf_token %}
+
+
+                <div class="sgng-form__header">
+
+                    <h2>
+                        Send a Message
+                    </h2>
+
+                    <p>
+                        All fields are required.
+                    </p>
+
+                </div>
+
+
+                {% if form.non_field_errors %}
+
+                    <div class="form-errors">
+
+                        {% for error in form.non_field_errors %}
+
+                            <p>
+                                {{ error }}
+                            </p>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+
+                {% for field in form %}
+
+                    <div class="form-field">
+
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+
+                        {{ field }}
+
+
+                        {% if field.help_text %}
+
+                            <div class="form-help">
+                                {{ field.help_text|safe }}
+                            </div>
+
+                        {% endif %}
+
+
+                        {% if field.errors %}
+
+                            <div
+                                class="form-errors"
+                                role="alert"
+                            >
+
+                                {% for error in field.errors %}
+
+                                    <p>
+                                        {{ error }}
+                                    </p>
+
+                                {% endfor %}
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+
+                <div class="form-actions">
+
+                    <button
+                        class="button button--primary"
+                        type="submit"
+                    >
+                        Send Message
+                    </button>
+
+                    <a
+                        class="button button--secondary"
+                        href="{% url 'pages:home' %}"
+                    >
+                        Return Home
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

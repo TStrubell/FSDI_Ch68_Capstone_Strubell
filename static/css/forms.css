@@ -1,0 +1,1299 @@
+/* =========================================================
+   CINEMATIC SGnG MARKETPLACE
+   Shared Form Styles
+
+   Used by:
+   - Contact
+   - Login
+   - Registration
+   - Product Create
+   - Product Update
+   - Delete Confirmation
+   ========================================================= */
+
+
+/* =========================================================
+   FORM PAGE
+   ========================================================= */
+
+.form-page {
+    min-height: 70vh;
+
+    padding:
+        clamp(3rem, 7vw, 6rem)
+        0;
+
+    background:
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(214, 179, 106, 0.10),
+            transparent 28%
+        ),
+        var(--color-background);
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.form-page__header {
+    max-width: 50rem;
+
+    margin-bottom: 2.5rem;
+}
+
+.form-page__header h1 {
+    margin: 0;
+
+    font-size:
+        clamp(2.8rem, 7vw, 5rem);
+
+    line-height: 0.98;
+
+    letter-spacing: -0.045em;
+}
+
+.form-page__summary {
+    max-width: 42rem;
+
+    margin: 1.25rem 0 0;
+
+    color: var(--color-text-muted);
+
+    font-size:
+        clamp(1rem, 2vw, 1.15rem);
+
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   FORM LAYOUT
+   ========================================================= */
+
+.form-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.4fr)
+        minmax(16rem, 0.6fr);
+
+    align-items: start;
+
+    gap: 2rem;
+}
+
+
+/* =========================================================
+   FORM PANEL
+   ========================================================= */
+
+.form-panel {
+    padding: clamp(1.25rem, 3vw, 2rem);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-large);
+
+    background: var(--color-surface);
+
+    box-shadow: var(--shadow);
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.sgng-form {
+    display: grid;
+
+    gap: 1.35rem;
+}
+
+
+/* =========================================================
+   FORM FIELD
+   ========================================================= */
+
+.form-field {
+    display: grid;
+
+    gap: 0.45rem;
+}
+
+.form-field label {
+    color: var(--color-text);
+
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.required-marker {
+    color: var(--color-gold);
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+    width: 100%;
+
+    padding: 0.8rem 0.9rem;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-small);
+
+    color: var(--color-text);
+
+    background: var(--color-background);
+
+    outline: none;
+
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+.form-field input {
+    min-height: 3rem;
+}
+
+.form-field textarea {
+    min-height: 10rem;
+
+    resize: vertical;
+}
+
+.form-field select {
+    min-height: 3rem;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   PLACEHOLDERS
+   ========================================================= */
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+    color: var(--color-text-muted);
+
+    opacity: 0.7;
+}
+
+
+/* =========================================================
+   INPUT STATES
+   ========================================================= */
+
+.form-field input:hover,
+.form-field textarea:hover,
+.form-field select:hover {
+    border-color:
+        rgba(214, 179, 106, 0.6);
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+    border-color: var(--color-gold);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(214, 179, 106, 0.12);
+}
+
+
+/* =========================================================
+   HELP TEXT
+   ========================================================= */
+
+.form-help {
+    color: var(--color-text-muted);
+
+    font-size: 0.8rem;
+
+    line-height: 1.5;
+}
+
+.form-help ul {
+    margin: 0.35rem 0 0;
+
+    padding-left: 1.25rem;
+}
+
+
+/* =========================================================
+   FIELD ERRORS
+   ========================================================= */
+
+.form-errors {
+    color: var(--color-danger);
+
+    font-size: 0.82rem;
+
+    font-weight: 600;
+}
+
+.form-errors p {
+    margin: 0.2rem 0;
+}
+
+.form-errors ul {
+    margin: 0;
+
+    padding-left: 1.25rem;
+}
+
+
+/* =========================================================
+   ALERTS
+   ========================================================= */
+
+.form-alert {
+    padding: 0.85rem 1rem;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-small);
+
+    background: var(--color-background);
+}
+
+.form-alert--error {
+    border-color: var(--color-danger);
+
+    color: var(--color-danger);
+}
+
+.form-alert--success {
+    border-color: var(--color-success);
+
+    color: var(--color-success);
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+   ========================================================= */
+
+.form-actions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    margin-top: 0.5rem;
+
+    gap: 0.75rem;
+}
+
+
+/* =========================================================
+   SUPPORT PANEL
+   ========================================================= */
+
+.form-support {
+    padding: 1.5rem;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-large);
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--color-surface-light),
+            var(--color-surface)
+        );
+
+    box-shadow: var(--shadow-small);
+}
+
+.form-support h2 {
+    margin-bottom: 1rem;
+
+    font-size: 1.5rem;
+}
+
+.form-support p {
+    color: var(--color-text-muted);
+
+    line-height: 1.7;
+}
+
+.form-support .button {
+    margin-top: 0.75rem;
+}
+
+
+/* =========================================================
+   CHECKBOXES
+   ========================================================= */
+
+.form-field input[type="checkbox"] {
+    width: 1.1rem;
+    height: 1.1rem;
+    min-height: auto;
+
+    accent-color: var(--color-gold);
+}
+
+
+/* =========================================================
+   FILE INPUTS
+   ========================================================= */
+
+.form-field input[type="file"] {
+    min-height: auto;
+
+    padding: 0.65rem;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   DELETE / DANGER PANELS
+   ========================================================= */
+
+.form-panel--danger {
+    border-color:
+        rgba(224, 122, 111, 0.55);
+}
+
+.danger-heading {
+    color: var(--color-danger);
+}
+
+.button--danger {
+    border-color: var(--color-danger);
+
+    color: var(--color-white);
+
+    background: var(--color-danger);
+}
+
+.button--danger:hover,
+.button--danger:focus-visible {
+    border-color: #ef9187;
+
+    background: #ef9187;
+}
+
+
+/* =========================================================
+   ACCOUNT LINKS
+   ========================================================= */
+
+.account-links {
+    margin-top: 1.5rem;
+
+    color: var(--color-text-muted);
+
+    font-size: 0.9rem;
+}
+
+.account-links a {
+    color: var(--color-gold);
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.account-links a:hover,
+.account-links a:focus-visible {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 860px) {
+
+    .form-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .form-support {
+        order: 2;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+    .form-page {
+        padding: 2.5rem 0;
+    }
+
+    .form-page__header {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-page__header h1 {
+        font-size:
+            clamp(2.4rem, 13vw, 3.5rem);
+    }
+
+    .form-panel {
+        padding: 1rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions .button {
+        width: 100%;
+    }
+
+    .form-support {
+        padding: 1.25rem;
+    }
+
+}
+
+/* =========================================================
+   DELETE PRODUCT SUMMARY
+   ========================================================= */
+
+.delete-product-summary {
+    margin: 1.5rem 0;
+    padding: 1.25rem;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+
+    background: var(--color-background);
+}
+
+.delete-product-summary h2 {
+    margin-bottom: 1rem;
+}
+
+.delete-product-image {
+    width: 100%;
+    max-width: 22rem;
+
+    margin-bottom: 1.5rem;
+
+    aspect-ratio: 4 / 3;
+
+    object-fit: cover;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+}
+
+.delete-product-facts {
+    display: grid;
+
+    margin: 0;
+
+    border-top: 1px solid var(--color-border);
+}
+
+.delete-product-facts div {
+    display: grid;
+
+    grid-template-columns: 8rem 1fr;
+
+    padding: 0.75rem 0;
+
+    border-bottom: 1px solid var(--color-border);
+
+    gap: 1rem;
+}
+
+.delete-product-facts dt {
+    color: var(--color-text-muted);
+
+    font-weight: 700;
+}
+
+.delete-product-facts dd {
+    margin: 0;
+
+    color: var(--color-text);
+}
+
+
+@media (max-width: 520px) {
+
+    .delete-product-facts div {
+        grid-template-columns: 1fr;
+
+        gap: 0.2rem;
+    }
+
+}
+
+/* =========================================================
+   PRODUCT MANAGEMENT
+   ========================================================= */
+
+
+/* =========================================================
+   ADMINISTRATIVE GUIDANCE
+   ========================================================= */
+
+.form-support__guidance {
+    margin: 1.5rem 0;
+
+    padding-top: 1.25rem;
+
+    border-top: 1px solid var(--color-border);
+}
+
+.form-support__guidance h3 {
+    margin: 0 0 0.75rem;
+
+    color: var(--color-text);
+
+    font-size: 1rem;
+}
+
+.form-support__guidance ul {
+    margin: 0;
+
+    padding-left: 1.25rem;
+
+    color: var(--color-text-muted);
+}
+
+.form-support__guidance li {
+    margin: 0.6rem 0;
+
+    line-height: 1.55;
+}
+
+.form-support .button + .button {
+    margin-top: 0.65rem;
+}
+
+
+/* =========================================================
+   EXISTING IMAGE PREVIEW
+   ========================================================= */
+
+.current-product-image {
+    margin-bottom: 0.75rem;
+}
+
+.current-product-image__preview {
+    width: min(100%, 20rem);
+
+    max-height: 15rem;
+
+    object-fit: cover;
+
+    margin-top: 0.5rem;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+
+    background: var(--color-background);
+}
+
+
+/* =========================================================
+   DELETE PAGE
+   ========================================================= */
+
+.delete-product-summary {
+    margin: 1.5rem 0;
+
+    padding:
+        clamp(1rem, 3vw, 1.5rem);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+
+    background: var(--color-background);
+}
+
+.delete-product-summary h2 {
+    margin-bottom: 1.25rem;
+
+    font-size:
+        clamp(1.8rem, 4vw, 2.6rem);
+
+    letter-spacing: -0.03em;
+}
+
+
+/* =========================================================
+   DELETE PRODUCT IMAGE
+   ========================================================= */
+
+.delete-product-media {
+    overflow: hidden;
+
+    margin-bottom: 1.5rem;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+
+    background: var(--color-surface);
+}
+
+.delete-product-image {
+    width: 100%;
+
+    max-height: 22rem;
+
+    object-fit: cover;
+}
+
+.delete-product-placeholder {
+    display: grid;
+
+    width: 100%;
+    min-height: 15rem;
+
+    margin-bottom: 1.5rem;
+
+    place-items: center;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+
+    color: var(--color-gold);
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--color-surface-light),
+            var(--color-background)
+        );
+
+    font-size: 2rem;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   DELETE PRODUCT FACTS
+   ========================================================= */
+
+.delete-product-facts {
+    display: grid;
+
+    margin: 0;
+
+    border-top: 1px solid var(--color-border);
+}
+
+.delete-product-facts div {
+    display: grid;
+
+    grid-template-columns: 10rem 1fr;
+
+    padding: 0.8rem 0;
+
+    gap: 1rem;
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+.delete-product-facts dt {
+    color: var(--color-text-muted);
+
+    font-weight: 700;
+}
+
+.delete-product-facts dd {
+    margin: 0;
+
+    color: var(--color-text);
+}
+
+
+/* =========================================================
+   DELETE CONFIRMATION COPY
+   ========================================================= */
+
+.delete-confirmation-copy {
+    padding: 1rem;
+
+    border-left: 3px solid var(--color-danger);
+
+    border-radius:
+        0
+        var(--radius-small)
+        var(--radius-small)
+        0;
+
+    background:
+        rgba(224, 122, 111, 0.06);
+}
+
+.delete-confirmation-copy p:last-child {
+    margin-bottom: 0;
+
+    color: var(--color-text-muted);
+}
+
+
+/* =========================================================
+   MOBILE PRODUCT MANAGEMENT
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+    .delete-product-facts div {
+        grid-template-columns: 1fr;
+
+        gap: 0.2rem;
+    }
+
+    .current-product-image__preview {
+        width: 100%;
+    }
+
+}
+
+/* =========================================================
+   PRODUCT MANAGEMENT DASHBOARD
+   ========================================================= */
+
+.management-summary {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.management-stat {
+    padding: 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-small);
+}
+
+.management-stat span {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.management-stat strong {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--color-gold);
+    font-size: 2rem;
+}
+
+.management-actions {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    gap: 0.75rem;
+}
+
+.management-filters {
+    display: grid;
+    grid-template-columns:
+        minmax(14rem, 2fr)
+        minmax(12rem, 1fr)
+        auto;
+    align-items: end;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+    background: var(--color-surface);
+}
+
+.management-table-wrapper {
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+    background: var(--color-surface);
+    box-shadow: var(--shadow);
+}
+
+.management-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.management-table th,
+.management-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+    vertical-align: top;
+}
+
+.management-table th {
+    color: var(--color-gold);
+    background: var(--color-surface-light);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.management-table tbody tr:hover {
+    background: rgba(214, 179, 106, 0.035);
+}
+
+.management-table small {
+    display: block;
+    color: var(--color-text-muted);
+}
+
+.status-success {
+    color: var(--color-success);
+    font-weight: 700;
+}
+
+.status-danger,
+.danger-link {
+    color: var(--color-danger);
+    font-weight: 700;
+}
+
+.status-muted {
+    color: var(--color-text-muted);
+}
+
+.status-featured {
+    display: inline-block;
+    margin-left: 0.35rem;
+    color: var(--color-gold);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.table-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.table-actions a {
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.table-actions a:hover,
+.table-actions a:focus-visible {
+    text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+    .management-summary {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .management-filters {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .management-filters .form-actions {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 680px) {
+    .management-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .management-actions {
+        flex-direction: column;
+    }
+
+    .management-actions .button {
+        width: 100%;
+    }
+
+    .management-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .management-filters .form-actions {
+        grid-column: auto;
+    }
+
+    .management-table,
+    .management-table tbody,
+    .management-table tr,
+    .management-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .management-table thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+    }
+
+    .management-table tr {
+        padding: 0.75rem;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .management-table td {
+        display: grid;
+        grid-template-columns: 7rem 1fr;
+        padding: 0.55rem;
+        border: 0;
+        gap: 0.75rem;
+    }
+
+    .management-table td::before {
+        color: var(--color-text-muted);
+        content: attr(data-label);
+        font-size: 0.78rem;
+        font-weight: 700;
+    }
+}
+
+/* =========================================================
+   PRODUCT DELETE CONFIRMATION
+   ========================================================= */
+
+.form-panel--danger {
+    border-color:
+        rgba(224, 122, 111, 0.65);
+}
+
+.danger-heading {
+    color: var(--color-danger);
+}
+
+
+/* =========================================================
+   DELETE WARNING
+   ========================================================= */
+
+.form-alert--error {
+    margin-bottom: 1.5rem;
+
+    border-color:
+        rgba(224, 122, 111, 0.65);
+
+    color: var(--color-text);
+
+    background:
+        rgba(224, 122, 111, 0.08);
+}
+
+.form-alert--error strong {
+    color: var(--color-danger);
+}
+
+
+/* =========================================================
+   PRODUCT DELETE SUMMARY
+   ========================================================= */
+
+.delete-product-summary {
+    margin-bottom: 2rem;
+
+    padding-bottom: 2rem;
+
+    border-bottom:
+        1px solid var(--color-border);
+}
+
+.delete-product-summary h2 {
+    margin-bottom: 1.25rem;
+
+    font-size:
+        clamp(1.8rem, 4vw, 2.6rem);
+}
+
+
+/* =========================================================
+   DELETE PRODUCT MEDIA
+   ========================================================= */
+
+.delete-product-media {
+    max-width: 30rem;
+
+    margin-bottom: 1.5rem;
+
+    overflow: hidden;
+
+    border:
+        1px solid var(--color-border);
+
+    border-radius:
+        var(--radius-medium);
+
+    background:
+        var(--color-background);
+}
+
+.delete-product-image {
+    width: 100%;
+
+    aspect-ratio: 4 / 3;
+
+    object-fit: cover;
+}
+
+.delete-product-placeholder {
+    display: grid;
+
+    width: 100%;
+    max-width: 30rem;
+
+    min-height: 16rem;
+
+    margin-bottom: 1.5rem;
+
+    place-items: center;
+
+    border:
+        1px solid var(--color-border);
+
+    border-radius:
+        var(--radius-medium);
+
+    color:
+        var(--color-gold);
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--color-surface-light),
+            var(--color-background)
+        );
+
+    font-size: 2rem;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   DELETE PRODUCT FACTS
+   ========================================================= */
+
+.delete-product-facts {
+    display: grid;
+
+    margin: 0;
+
+    border-top:
+        1px solid var(--color-border);
+}
+
+.delete-product-facts div {
+    display: grid;
+
+    grid-template-columns:
+        minmax(8rem, 0.5fr)
+        minmax(0, 1fr);
+
+    padding: 0.8rem 0;
+
+    gap: 1rem;
+
+    border-bottom:
+        1px solid var(--color-border);
+}
+
+.delete-product-facts dt {
+    color:
+        var(--color-text-muted);
+
+    font-weight: 700;
+}
+
+.delete-product-facts dd {
+    margin: 0;
+
+    color:
+        var(--color-text);
+}
+
+
+/* =========================================================
+   DELETE CONFIRMATION
+   ========================================================= */
+
+.delete-confirmation-form {
+    display: grid;
+
+    gap: 1.5rem;
+}
+
+.delete-confirmation-copy {
+    padding: 1.25rem;
+
+    border:
+        1px solid
+        rgba(224, 122, 111, 0.45);
+
+    border-radius:
+        var(--radius-medium);
+
+    background:
+        rgba(224, 122, 111, 0.06);
+}
+
+.delete-confirmation-copy h3 {
+    margin-bottom: 0.75rem;
+
+    color:
+        var(--color-danger);
+}
+
+.delete-confirmation-copy p {
+    color:
+        var(--color-text-muted);
+}
+
+.delete-confirmation-copy p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   DELETE ACTIONS
+   ========================================================= */
+
+.delete-actions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 0.75rem;
+}
+
+
+/* =========================================================
+   DANGER BUTTON
+   ========================================================= */
+
+.button--danger {
+    border:
+        1px solid var(--color-danger);
+
+    color:
+        #ffffff;
+
+    background:
+        var(--color-danger);
+
+    font-weight: 800;
+}
+
+.button--danger:hover,
+.button--danger:focus-visible {
+    border-color:
+        #ef9187;
+
+    color:
+        #ffffff;
+
+    background:
+        #ef9187;
+}
+
+.delete-confirm-button {
+    min-width: 15rem;
+}
+
+
+/* =========================================================
+   SUPPORT GUIDANCE
+   ========================================================= */
+
+.form-support__guidance {
+    margin:
+        1.5rem 0;
+
+    padding-top:
+        1.25rem;
+
+    border-top:
+        1px solid var(--color-border);
+}
+
+.form-support__guidance h3 {
+    margin-bottom:
+        0.75rem;
+
+    font-size:
+        1rem;
+}
+
+.form-support__guidance ul {
+    padding-left:
+        1.25rem;
+
+    color:
+        var(--color-text-muted);
+}
+
+.form-support__guidance li {
+    margin-bottom:
+        0.75rem;
+}
+
+.form-support .button + .button {
+    margin-top:
+        0.65rem;
+}
+
+
+/* =========================================================
+   DELETE RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 620px) {
+
+    .delete-product-facts div {
+        grid-template-columns:
+            1fr;
+
+        gap: 0.25rem;
+    }
+
+    .delete-actions {
+        flex-direction:
+            column;
+    }
+
+    .delete-actions .button {
+        width: 100%;
+    }
+
+    .delete-confirm-button {
+        min-width: 0;
+    }
+
+}

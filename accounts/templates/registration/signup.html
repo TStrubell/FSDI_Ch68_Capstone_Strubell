@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    Register | Cinematic SGnG Marketplace
+{% endblock %}
+
+
+{% block extra_css %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/forms.css' %}"
+    >
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="form-page">
+
+    <div class="page-shell">
+
+        <!-- =============================================
+             REGISTRATION PAGE HEADER
+        ============================================== -->
+
+        <header class="form-page__header">
+
+            <p class="eyebrow">
+                SGnG Account
+            </p>
+
+            <h1>
+                Create an Account
+            </h1>
+
+            <p class="form-page__summary">
+                Register for the Cinematic SGnG Marketplace
+                to establish your SGnG account.
+            </p>
+
+        </header>
+
+
+        <!-- =============================================
+             REGISTRATION LAYOUT
+        ============================================== -->
+
+        <div class="form-layout">
+
+
+            <!-- Registration Form -->
+
+            <div class="form-panel">
+
+                <form
+                    method="post"
+                    class="sgng-form"
+                    novalidate
+                >
+
+                    {% csrf_token %}
+
+
+                    <!-- Non-Field Errors -->
+
+                    {% if form.non_field_errors %}
+
+                        <div
+                            class="form-alert form-alert--error"
+                            role="alert"
+                        >
+
+                            {% for error in form.non_field_errors %}
+
+                                <p>
+                                    {{ error }}
+                                </p>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- Registration Fields -->
+
+                    {% for field in form %}
+
+                        <div class="form-field">
+
+                            <label
+                                for="{{ field.id_for_label }}"
+                            >
+                                {{ field.label }}
+
+                                {% if field.field.required %}
+
+                                    <span
+                                        class="required-marker"
+                                        aria-hidden="true"
+                                    >
+                                        *
+                                    </span>
+
+                                {% endif %}
+
+                            </label>
+
+
+                            {{ field }}
+
+
+                            <!-- Help Text -->
+
+                            {% if field.help_text %}
+
+                                <div class="form-help">
+                                    {{ field.help_text|safe }}
+                                </div>
+
+                            {% endif %}
+
+
+                            <!-- Field Errors -->
+
+                            {% if field.errors %}
+
+                                <div
+                                    class="form-errors"
+                                    role="alert"
+                                >
+
+                                    {% for error in field.errors %}
+
+                                        <p>
+                                            {{ error }}
+                                        </p>
+
+                                    {% endfor %}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endfor %}
+
+
+                    <!-- Form Actions -->
+
+                    <div class="form-actions">
+
+                        <button
+                            class="button button--primary"
+                            type="submit"
+                        >
+                            Create Account
+                        </button>
+
+                    </div>
+
+                </form>
+
+
+                <!-- Login Link -->
+
+                <div class="account-links">
+
+                    <p>
+                        Already have an account?
+
+                        <a href="{% url 'accounts:login' %}">
+                            Login
+                        </a>
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================================
+                 ACCOUNT SUPPORT PANEL
+            ========================================== -->
+
+            <aside class="form-support">
+
+                <p class="eyebrow">
+                    Join SGnG
+                </p>
+
+                <h2>
+                    Marketplace Access
+                </h2>
+
+                <p>
+                    Registration provides an authenticated
+                    SGnG account while maintaining a clear
+                    separation between customer-facing
+                    functionality and staff-authorized
+                    administrative features.
+                </p>
+
+                <p>
+                    The Phase I account system supports the
+                    registration, login, and logout
+                    functionality defined in the SGnG
+                    Core Architecture.
+                </p>
+
+
+                <a
+                    class="button button--secondary"
+                    href="{% url 'catalog:product-list' %}"
+                >
+                    Explore Marketplace
+                </a>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

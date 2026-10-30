@@ -1,0 +1,444 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    Delete {{ object.name }} | SGnG Staff
+{% endblock %}
+
+
+{% block extra_css %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/forms.css' %}"
+    >
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="form-page">
+
+    <div class="page-shell">
+
+
+        <!-- =================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <header class="form-page__header">
+
+            <p class="eyebrow">
+                Staff / Administration
+            </p>
+
+            <h1 class="danger-heading">
+                Delete Product
+            </h1>
+
+            <p class="form-page__summary">
+                Review the marketplace record carefully
+                before permanently deleting
+                <strong>{{ object.name }}</strong>.
+            </p>
+
+        </header>
+
+
+        <!-- =================================================
+             DELETE CONFIRMATION LAYOUT
+        ================================================== -->
+
+        <div class="form-layout">
+
+
+            <!-- =============================================
+                 DELETE CONFIRMATION PANEL
+            ============================================== -->
+
+            <div
+                class="
+                    form-panel
+                    form-panel--danger
+                "
+            >
+
+
+                <!-- WARNING -->
+
+                <div
+                    class="
+                        form-alert
+                        form-alert--error
+                    "
+                    role="alert"
+                >
+
+                    <strong>
+                        ⚠️ Warning:
+                    </strong>
+
+                    Permanently deleting this product removes
+                    the marketplace record from the database.
+
+                    <strong>
+                        This action cannot be undone.
+                    </strong>
+
+                </div>
+
+
+                <!-- =========================================
+                     PRODUCT SUMMARY
+                ========================================== -->
+
+                <article class="delete-product-summary">
+
+                    <p class="eyebrow">
+                        Product Selected for Deletion
+                    </p>
+
+                    <h2>
+                        {{ object.name }}
+                    </h2>
+
+
+                    <!-- PRODUCT IMAGE -->
+
+                    {% if object.image %}
+
+                        <div class="delete-product-media">
+
+                            <img
+                                class="delete-product-image"
+                                src="{{ object.image.url }}"
+                                alt="{{ object.name }}"
+                            >
+
+                        </div>
+
+                    {% else %}
+
+                        <div
+                            class="delete-product-placeholder"
+                            aria-label="No product image available"
+                        >
+                            SGnG
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- =====================================
+                         PRODUCT FACTS
+                    ====================================== -->
+
+                    <dl class="delete-product-facts">
+
+
+                        <!-- CATEGORY -->
+
+                        <div>
+
+                            <dt>
+                                Category
+                            </dt>
+
+                            <dd>
+                                {{ object.category.name }}
+                            </dd>
+
+                        </div>
+
+
+                        <!-- CONDITION -->
+
+                        <div>
+
+                            <dt>
+                                Condition
+                            </dt>
+
+                            <dd>
+                                {{ object.get_condition_display }}
+                            </dd>
+
+                        </div>
+
+
+                        <!-- SGNG PRICE -->
+
+                        <div>
+
+                            <dt>
+                                SGnG Price
+                            </dt>
+
+                            <dd>
+                                ${{ object.sgng_price }}
+                            </dd>
+
+                        </div>
+
+
+                        <!-- REFERENCE PRICE -->
+
+                        {% if object.reference_price %}
+
+                            <div>
+
+                                <dt>
+                                    Reference Price
+                                </dt>
+
+                                <dd>
+                                    ${{ object.reference_price }}
+                                </dd>
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <!-- INVENTORY -->
+
+                        <div>
+
+                            <dt>
+                                Inventory
+                            </dt>
+
+                            <dd>
+                                {{ object.inventory_quantity }}
+                            </dd>
+
+                        </div>
+
+
+                        <!-- FEATURED -->
+
+                        <div>
+
+                            <dt>
+                                Featured
+                            </dt>
+
+                            <dd>
+
+                                {% if object.featured %}
+                                    Yes
+                                {% else %}
+                                    No
+                                {% endif %}
+
+                            </dd>
+
+                        </div>
+
+
+                        <!-- ACTIVE -->
+
+                        <div>
+
+                            <dt>
+                                Active
+                            </dt>
+
+                            <dd>
+
+                                {% if object.active %}
+                                    Yes
+                                {% else %}
+                                    No
+                                {% endif %}
+
+                            </dd>
+
+                        </div>
+
+                    </dl>
+
+                </article>
+
+
+                <!-- =========================================
+                     DELETE CONFIRMATION FORM
+                ========================================== -->
+
+                <form
+                    method="post"
+                    class="delete-confirmation-form"
+                >
+
+                    {% csrf_token %}
+
+
+                    <div class="delete-confirmation-copy">
+
+                        <h3>
+                            Permanently delete this product?
+                        </h3>
+
+                        <p>
+                            You are about to permanently
+                            delete
+                            <strong>{{ object.name }}</strong>
+                            from the SGnG marketplace
+                            database.
+                        </p>
+
+                        <p>
+                            If the product is only
+                            temporarily unavailable, consider
+                            editing the inventory quantity or
+                            disabling its Active status
+                            instead.
+                        </p>
+
+                    </div>
+
+
+                    <!-- ACTION BUTTONS -->
+
+                    <div class="delete-actions">
+
+                        <button
+                            class="
+                                button
+                                button--danger
+                                delete-confirm-button
+                            "
+                            type="submit"
+                        >
+                            🗑️ Permanently Delete Product
+                        </button>
+
+
+                        <a
+                            class="
+                                button
+                                button--secondary
+                            "
+                            href="{% url 'catalog:product-management' %}"
+                        >
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- =============================================
+                 ADMINISTRATIVE GUIDANCE
+            ============================================== -->
+
+            <aside class="form-support">
+
+                <p class="eyebrow">
+                    Product Management
+                </p>
+
+                <h2>
+                    Before Deleting
+                </h2>
+
+                <p>
+                    Product deletion should be reserved for
+                    records that should no longer remain in
+                    the SGnG marketplace database.
+                </p>
+
+
+                <div class="form-support__guidance">
+
+                    <h3>
+                        Consider Updating Instead
+                    </h3>
+
+                    <ul>
+
+                        <li>
+                            Set inventory to zero when the
+                            item is temporarily unavailable.
+                        </li>
+
+                        <li>
+                            Disable
+                            <strong>Active</strong>
+                            when the product should
+                            temporarily disappear from the
+                            public Marketplace.
+                        </li>
+
+                        <li>
+                            Remove
+                            <strong>Featured</strong>
+                            status when the product should
+                            no longer appear on the
+                            Homepage.
+                        </li>
+
+                        <li>
+                            Update product information when
+                            the record remains valid but its
+                            details have changed.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                {% if object.active %}
+
+                    <a
+                        class="
+                            button
+                            button--secondary
+                            button--full
+                        "
+                        href="{{ object.get_absolute_url }}"
+                    >
+                        View Product
+                    </a>
+
+                {% endif %}
+
+
+                <a
+                    class="
+                        button
+                        button--secondary
+                        button--full
+                    "
+                    href="{% url 'catalog:product-management' %}"
+                >
+                    Return to Product Management
+                </a>
+
+
+                <a
+                    class="
+                        button
+                        button--secondary
+                        button--full
+                    "
+                    href="{% url 'catalog:product-list' %}"
+                >
+                    Return to Marketplace
+                </a>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

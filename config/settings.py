@@ -31,13 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # SGnG applications
+    # SGnG Applications
     'pages',
     'catalog',
     'accounts',
     'contact',
 
-    # Django applications
+    # Django REST Framework
+    'rest_framework',
+
+    # Django Applications
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -130,6 +133,15 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+# Authentication Redirects
+
+LOGIN_REDIRECT_URL = "pages:home"
+
+LOGOUT_REDIRECT_URL = "pages:home"
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Email

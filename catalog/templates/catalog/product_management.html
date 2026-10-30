@@ -1,0 +1,313 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    Product Management | SGnG Staff
+{% endblock %}
+
+
+{% block extra_css %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/forms.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/admin.css' %}"
+    >
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="staff-page">
+
+    <div class="page-shell">
+
+        <!-- =============================================
+             HEADER
+        ============================================== -->
+
+        <header class="staff-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    Staff / Administration
+                </p>
+
+                <h1>
+                    Product Management
+                </h1>
+
+                <p class="staff-header__summary">
+                    Manage SGnG products, pricing,
+                    availability, featured status,
+                    and marketplace inventory.
+                </p>
+
+            </div>
+
+
+            <div class="staff-header__actions">
+
+                <a
+                    class="button button--primary"
+                    href="{% url 'catalog:product-create' %}"
+                >
+                    + Create Product
+                </a>
+
+                <a
+                    class="button button--secondary"
+                    href="/admin/catalog/category/"
+                >
+                    Manage Categories
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- =============================================
+             SUMMARY CARDS
+        ============================================== -->
+
+        <div class="staff-summary">
+
+            <article class="staff-stat">
+
+                <span class="staff-stat__value">
+                    {{ page_obj.paginator.count }}
+                </span>
+
+                <span class="staff-stat__label">
+                    Products
+                </span>
+
+            </article>
+
+
+            <article class="staff-stat">
+
+                <span class="staff-stat__value">
+                    {{ active_count }}
+                </span>
+
+                <span class="staff-stat__label">
+                    Active
+                </span>
+
+            </article>
+
+
+            <article class="staff-stat">
+
+                <span class="staff-stat__value">
+                    {{ featured_count }}
+                </span>
+
+                <span class="staff-stat__label">
+                    Featured
+                </span>
+
+            </article>
+
+
+            <article class="staff-stat">
+
+                <span class="staff-stat__value">
+                    {{ out_of_stock_count }}
+                </span>
+
+                <span class="staff-stat__label">
+                    Out of Stock
+                </span>
+
+            </article>
+
+
+            <article class="staff-stat">
+
+                <span class="staff-stat__value">
+                    {{ category_count }}
+                </span>
+
+                <span class="staff-stat__label">
+                    Categories
+                </span>
+
+            </article>
+
+        </div>
+
+
+        <!-- =============================================
+             PRODUCT TABLE
+        ============================================== -->
+
+        <div class="staff-table-wrapper">
+
+            <table class="staff-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Condition</th>
+                        <th>Price</th>
+                        <th>Inventory</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for product in products %}
+
+                        <tr>
+
+                            <td
+                                data-label="Product"
+                            >
+
+                                <strong>
+                                    {{ product.name }}
+                                </strong>
+
+                                {% if product.featured %}
+
+                                    <span class="staff-badge">
+                                        Featured
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td data-label="Category">
+                                {{ product.category.name }}
+                            </td>
+
+
+                            <td data-label="Condition">
+                                {{ product.get_condition_display }}
+                            </td>
+
+
+                            <td data-label="Price">
+                                ${{ product.sgng_price }}
+                            </td>
+
+
+                            <td data-label="Inventory">
+
+                                {% if product.inventory_quantity > 0 %}
+
+                                    {{ product.inventory_quantity }}
+
+                                {% else %}
+
+                                    <span class="staff-danger">
+                                        Out of Stock
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td data-label="Status">
+
+                                {% if product.active %}
+
+                                    <span
+                                        class="
+                                            staff-status
+                                            staff-status--active
+                                        "
+                                    >
+                                        Active
+                                    </span>
+
+                                {% else %}
+
+                                    <span
+                                        class="
+                                            staff-status
+                                            staff-status--inactive
+                                        "
+                                    >
+                                        Inactive
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td
+                                class="staff-actions"
+                                data-label="Actions"
+                            >
+
+                                {% if product.active %}
+
+                                    <a
+                                        href="{{ product.get_absolute_url }}"
+                                    >
+                                        View
+                                    </a>
+
+                                {% endif %}
+
+                                <a
+                                    href="{% url 'catalog:product-update' product.pk %}"
+                                >
+                                    Edit
+                                </a>
+
+                                <a
+                                    class="staff-danger"
+                                    href="{% url 'catalog:product-delete' product.pk %}"
+                                >
+                                    Delete
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    {% empty %}
+
+                        <tr>
+
+                            <td colspan="7">
+                                No products have been created.
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

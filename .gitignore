@@ -1,29 +1,32 @@
-# Python
+# PYTHON CACHE
 __pycache__/
 *.py[cod]
 
-# Virtual environment
+# VIRTUAL ENVIRONMENT
 .venv/
+v*nv/
 venv/
 
-# Environment variables
+# ENVIRONMENT VARIABLES
 .env
 
-# Django development database
-db.sqlite3
+# DJANGO DEVELOPMENT DATABASE
+db.*qlite3
+*.sqlite3
 
-# User-uploaded media
+# USER-UPLOADED MEDIA
 media/
 
-# Testing / coverage
+# TESTING / COVERAGE
 .coverage
 htmlcov/
+htmlco*/
 .pytest_cache/
 
 # IDE
 .vscode/
 .idea/
 
-# Operating system
+# OPERATING SYSTEM
 .DS_Store
 Thumbs.db
