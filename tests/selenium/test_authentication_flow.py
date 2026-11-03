@@ -138,19 +138,12 @@ class AuthenticationFlowTests(SeleniumTestCase):
             'button[type="submit"]',
         ).click()
 
-        self.wait.until(
-            EC.presence_of_element_located(
+        logout_button = self.wait.until(
+            EC.element_to_be_clickable(
                 (
                     By.CSS_SELECTOR,
                     ".nav-logout-button",
                 )
-            )
-        )
-
-        logout_button = (
-            self.browser.find_element(
-                By.CSS_SELECTOR,
-                ".nav-logout-button",
             )
         )
 
@@ -162,6 +155,29 @@ class AuthenticationFlowTests(SeleniumTestCase):
             )
         )
 
-        self.assert_page_contains(
-            "Login"
+        self.wait.until(
+            EC.invisibility_of_element_located(
+                (
+                    By.CSS_SELECTOR,
+                    ".nav-logout-button",
+                )
+            )
+        )
+
+        login_link = self.wait.until(
+            EC.visibility_of_element_located(
+                (
+                    By.CSS_SELECTOR,
+                    'a[href="/accounts/login/"]',
+                )
+            )
+        )
+
+        self.assertTrue(
+            login_link.is_displayed()
+        )
+
+        self.assertEqual(
+            login_link.text.strip(),
+            "Login",
         )

@@ -121,11 +121,21 @@ class MarketplaceFlowTests(SeleniumTestCase):
 
 
     def test_marketplace_empty_search_state(self):
-        self.open("/marketplace/")
+        """
+        A search with no matching Products displays the
+        Marketplace empty-result state.
+        """
+        self.open(
+            "/marketplace/"
+        )
 
-        search = self.browser.find_element(
-            By.NAME,
-            "q",
+        search = self.wait.until(
+            EC.visibility_of_element_located(
+                (
+                    By.NAME,
+                    "q",
+                )
+            )
         )
 
         search.send_keys(
@@ -140,8 +150,51 @@ class MarketplaceFlowTests(SeleniumTestCase):
 
         submit.click()
 
-        self.assert_page_contains(
-            "No Products Found"
+        # Wait for the submitted search query to appear in
+        # the resulting URL before inspecting the new page.
+        self.wait.until(
+            EC.url_contains(
+                "q=PRODUCT-DOES-NOT-EXIST"
+            )
+        )
+
+        # Wait for the actual empty-result state rendered by
+        # the Marketplace template.
+        empty_state = self.wait.until(
+            EC.visibility_of_element_located(
+                (
+                    By.CSS_SELECTOR,
+                    ".empty-state",
+                )
+            )
+        )
+
+        self.assertIsNotNone(
+            empty_state
+        )
+
+        self.assertIn(
+            "No Products Found",
+            empty_state.text,
+        )
+
+        self.assertIn(
+            (
+                "No products match the current "
+                "search or filter selections."
+            ),
+            empty_state.text,
+        )
+
+        view_all_link = (
+            empty_state.find_element(
+                By.LINK_TEXT,
+                "View All Products",
+            )
+        )
+
+        self.assertTrue(
+            view_all_link.is_displayed()
         )
 
 
