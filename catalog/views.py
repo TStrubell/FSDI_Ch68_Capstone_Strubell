@@ -351,22 +351,6 @@ class ProductCreateView(
         "Product created successfully."
     )
 
-    def form_valid(
-        self,
-        form,
-    ):
-        messages.success(
-            self.request,
-            (
-                "Product created "
-                "successfully."
-            ),
-        )
-
-        return super().form_valid(
-            form
-        )
-
 
 class ProductUpdateView(
     StaffRequiredMixin,
@@ -397,22 +381,6 @@ class ProductUpdateView(
         return (
             Product.objects
             .select_related("category")
-        )
-
-    def form_valid(
-        self,
-        form,
-    ):
-        messages.success(
-            self.request,
-            (
-                "Product updated "
-                "successfully."
-            ),
-        )
-
-        return super().form_valid(
-            form
         )
 
 
