@@ -229,23 +229,35 @@
 
             <div class="site-footer__brand">
                 <p>
-                    <strong>
-                        Strubell Goods &amp; Gear
-                    </strong>
+                    <strong>Strubell Goods &amp; Gear</strong>
                 </p>
 
                 <p>
-                    Quality gear. Honest value.
+                    Quality gear. Honest value.<br>
                     A story behind every step.
                 </p>
             </div>
 
             <div class="site-footer__legal">
-                <p>
-                    &copy;
-                    {% now "Y" %}
-                    Strubell Goods &amp; Gear
+                <p class="site-footer__copyright">
+                    &copy; {% now "Y" %} Strubell Goods &amp; Gear.
+                    All rights reserved.
                 </p>
+
+                <nav class="site-footer__legal-links" aria-label="Legal">
+                    <a href="{% url 'pages:terms_of_service' %}">
+                        Terms of Service
+                    </a>
+
+                    <span
+                        class="site-footer__legal-separator"
+                        aria-hidden="true"
+                    >|</span>
+
+                    <a href="{% url 'pages:privacy_policy' %}">
+                        Privacy Policy
+                    </a>
+                </nav>
             </div>
 
         </div>

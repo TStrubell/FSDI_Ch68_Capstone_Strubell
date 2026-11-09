@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from django.shortcuts import render
 
 from catalog.models import Product
 
@@ -24,3 +25,11 @@ class HomeView(TemplateView):
 
 class AboutView(TemplateView):
     template_name = "pages/about.html"
+
+
+def terms_of_service(request):
+    return render(request, "pages/terms_of_service.html")
+
+
+def privacy_policy(request):
+    return render(request, "pages/privacy_policy.html")
