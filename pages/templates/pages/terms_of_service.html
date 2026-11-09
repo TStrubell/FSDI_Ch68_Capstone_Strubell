@@ -1,36 +1,538 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Terms of Service | SGnG{% endblock %}
+{% block title %}
+    Terms of Service | SGnG
+{% endblock %}
+
+{% block extra_css %}
+    <link
+        rel="stylesheet"
+        href="{% static 'css/legal.css' %}"
+    >
+{% endblock %}
 
 {% block content %}
 <section class="legal-page">
-    <div class="container">
+    <div class="legal-page__shell">
+
         <header class="legal-page__header">
             <p class="legal-page__eyebrow">
-                Strubell Goods & Gear
+                Strubell Goods &amp; Gear
             </p>
 
             <h1>Terms of Service</h1>
 
-            <p>
-                Terms governing the use of the SGnG website,
-                Marketplace, and related services.
+            <p class="legal-page__summary">
+                These Terms govern access to and use of the
+                Cinematic SGnG Marketplace, its content, accounts,
+                communications, features, and related services.
+            </p>
+
+            <p class="legal-page__dates">
+                <span>
+                    <strong>Effective Date:</strong>
+                    November 5, 2026
+                </span>
+
+                <span>
+                    <strong>Last Updated:</strong>
+                    November 8, 2026
+                </span>
+            </p>
+
+            <p class="legal-page__notice">
+                <strong>Please read these Terms carefully.</strong>
+                By accessing or using eligible SGnG services, users
+                agree to these Terms to the extent permitted by
+                applicable law.
             </p>
         </header>
 
         <div class="legal-page__content">
-            <h2>About These Terms</h2>
 
-            <p>
-                This page provides the Terms of Service for
-                Strubell Goods & Gear (SGnG).
-            </p>
+            <section class="legal-section">
+                <h2>1. Description of the Service</h2>
 
-            <p>
-                Additional terms and conditions will be published
-                here as the SGnG platform and its services develop.
-            </p>
+                <p>
+                    Strubell Goods &amp; Gear
+                    (<strong>SGnG</strong>), a DBA of
+                    Strubell Publishing LLC, operates an online
+                    Marketplace and related digital services.
+                    Available functionality may allow users to browse
+                    products, view Marketplace information, create or
+                    access an account, communicate with SGnG, submit
+                    forms, and use other features made available
+                    through the application.
+                </p>
+
+                <p>
+                    Features may be modified, suspended, introduced,
+                    or discontinued as the service develops, subject
+                    to applicable law and obligations associated with
+                    completed transactions.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>2. Eligibility and Lawful Use</h2>
+
+                <p>
+                    Users may use SGnG only when legally capable of
+                    entering into an applicable agreement or when
+                    using the service with appropriate involvement of
+                    a parent or legal guardian where permitted by law.
+                </p>
+
+                <p>
+                    SGnG services may be used only for lawful purposes
+                    and in accordance with these Terms.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>3. User Accounts and Account Security</h2>
+
+                <p>
+                    Certain features may require an account. Users
+                    agree to provide accurate information, maintain
+                    reasonably current account information, protect
+                    login credentials, and promptly notify SGnG of
+                    suspected unauthorized access.
+                </p>
+
+                <p>
+                    Users may not impersonate another person,
+                    misrepresent identity, or create an account using
+                    information they are not authorized to use.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>4. User Rights</h2>
+
+                <p>
+                    Subject to these Terms, SGnG grants users a
+                    limited, personal, non-exclusive,
+                    non-transferable, and revocable right to access
+                    and use available services for their intended
+                    lawful purposes.
+                </p>
+
+                <p>
+                    Access to SGnG services does not transfer
+                    ownership of SGnG intellectual property to users.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>5. User Responsibilities</h2>
+
+                <p>Users agree not to:</p>
+
+                <ul>
+                    <li>
+                        Use SGnG for unlawful, fraudulent, or
+                        deceptive purposes.
+                    </li>
+                    <li>
+                        Attempt unauthorized access to accounts,
+                        systems, or restricted features.
+                    </li>
+                    <li>
+                        Interfere with application operation,
+                        availability, or security.
+                    </li>
+                    <li>
+                        Introduce malicious software or harmful code.
+                    </li>
+                    <li>
+                        Infringe intellectual-property, privacy, or
+                        other legal rights.
+                    </li>
+                    <li>
+                        Submit information the user is not authorized
+                        to provide.
+                    </li>
+                </ul>
+            </section>
+
+            <section class="legal-section">
+                <h2>6. Products and Marketplace Information</h2>
+
+                <p>
+                    SGnG attempts to present product descriptions,
+                    availability, pricing, photographs, and other
+                    Marketplace information accurately. Displays and
+                    representations may vary based on devices,
+                    screens, product revisions, and other
+                    circumstances.
+                </p>
+
+                <p>
+                    Where permitted, SGnG may correct typographical,
+                    technical, availability, or pricing errors before
+                    completing a transaction.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>7. Orders and Acceptance</h2>
+
+                <p>
+                    Submission of an order does not necessarily mean
+                    SGnG has accepted the order. An order may be
+                    subject to product availability, payment
+                    authorization, verification, applicable
+                    purchasing restrictions, and fraud or security
+                    review.
+                </p>
+
+                <p>
+                    If SGnG properly cancels an order after payment
+                    has been collected, an appropriate refund will be
+                    provided as required by applicable law and
+                    applicable business policies.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>8. Prices, Payments, and Taxes</h2>
+
+                <p>
+                    Before completing an available purchase, users
+                    are responsible for reviewing the selected
+                    product or service, displayed price, quantity,
+                    shipping charges, applicable taxes, and order
+                    total.
+                </p>
+
+                <p>
+                    SGnG may use third-party payment processors when
+                    payment functionality is implemented. Applicable
+                    providers will be identified through the
+                    checkout process or related disclosures.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>
+                    9. Recurring Payments and Subscriptions
+                </h2>
+
+                <p>
+                    SGnG does not currently represent that recurring
+                    payment subscriptions are available unless an
+                    applicable offer and checkout process expressly
+                    identify that functionality.
+                </p>
+
+                <p>
+                    If SGnG introduces subscriptions, automatic
+                    renewals, free-to-paid conversions, or another
+                    recurring-payment feature, material terms will be
+                    disclosed and any authorization required by
+                    applicable law will be obtained before recurring
+                    charges are imposed.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>
+                    10. Shipping, Delivery, Returns, and Refunds
+                </h2>
+
+                <p>
+                    When SGnG offers physical products for shipment,
+                    applicable shipping, delivery, return, exchange,
+                    cancellation, and refund information will be
+                    provided through the Marketplace, checkout
+                    process, order information, or applicable
+                    standalone policy.
+                </p>
+
+                <p>
+                    Nothing in these Terms limits a consumer right or
+                    remedy that cannot lawfully be waived.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>11. Intellectual Property</h2>
+
+                <p>
+                    Unless otherwise stated, SGnG or its applicable
+                    licensors owns the rights in original SGnG
+                    branding, written content, website design,
+                    graphics, photographs, software, code,
+                    compilations, and other proprietary material.
+                </p>
+
+                <p>
+                    Third-party trademarks, photographs, product
+                    names, and other intellectual property remain the
+                    property of their respective owners.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>12. User-Submitted Content</h2>
+
+                <p>
+                    If SGnG provides a feature for users to submit
+                    public-facing reviews, comments, photographs, or
+                    similar content, users retain whatever ownership
+                    rights they lawfully hold in their original
+                    material.
+                </p>
+
+                <p>
+                    Users must possess the rights necessary to submit
+                    content. SGnG may remove content that violates
+                    these Terms, infringes rights, creates security
+                    concerns, or violates applicable law.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>13. Third-Party Services and Links</h2>
+
+                <p>
+                    SGnG may link to or integrate services operated
+                    by third parties. Those services may maintain
+                    separate terms, privacy policies, security
+                    practices, payment requirements, and content
+                    policies.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>14. Privacy and Data Protection</h2>
+
+                <p>
+                    SGnG's collection, use, storage, and disclosure
+                    of personal information are addressed through
+                    the separate
+                    <a href="{% url 'pages:privacy_policy' %}">
+                        SGnG Privacy Policy
+                    </a>
+                    and applicable notices.
+                </p>
+
+                <p>
+                    Users should review the Privacy Policy for
+                    information concerning categories of information,
+                    purposes of use, third-party relationships,
+                    retention, security practices, and applicable
+                    privacy choices.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>15. Security</h2>
+
+                <p>
+                    SGnG uses reasonable measures appropriate to the
+                    application to help protect systems and
+                    information under its control. No
+                    Internet-connected service can guarantee absolute
+                    security.
+                </p>
+
+                <p>
+                    Users are responsible for taking reasonable
+                    precautions to protect passwords, credentials,
+                    devices, and account access.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>
+                    16. Service Availability and Disclaimer
+                </h2>
+
+                <p>
+                    SGnG strives to provide reliable services but
+                    does not warrant that every part of the website
+                    will be continuously available or error-free.
+                </p>
+
+                <p>
+                    To the maximum extent permitted by applicable
+                    law, services are provided on an
+                    <strong>"as available"</strong> basis, subject to
+                    warranties and rights that cannot legally be
+                    excluded.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>17. Limitation of Liability</h2>
+
+                <p>
+                    To the maximum extent permitted by applicable
+                    law, Strubell Publishing LLC, including its
+                    Strubell Goods &amp; Gear DBA, will not be liable
+                    for indirect, incidental, special, exemplary,
+                    punitive, or consequential damages where such
+                    damages may lawfully be excluded or limited.
+                </p>
+
+                <p>
+                    These Terms do not waive consumer rights or
+                    remedies that cannot lawfully be waived.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>18. Governing Law</h2>
+
+                <p>
+                    These Terms and disputes arising from them are
+                    governed by the laws of the Commonwealth of
+                    Kentucky, without regard to conflict-of-laws
+                    rules, except where federal law or another
+                    applicable law controls.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>19. Dispute Resolution</h2>
+
+                <p>
+                    SGnG encourages users to contact the Company
+                    first when a disagreement concerns an order,
+                    charge, product, account, refund, website
+                    interaction, or another SGnG matter.
+                </p>
+
+                <p>
+                    The parties should attempt in good faith to
+                    resolve an applicable concern through direct
+                    communication before pursuing formal proceedings
+                    when reasonable and appropriate.
+                </p>
+
+                <p>
+                    If informal resolution is unsuccessful, the
+                    parties retain remedies available under
+                    applicable law. Nothing in these Terms prevents
+                    a consumer from submitting a complaint to an
+                    appropriate governmental authority.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>20. Suspension and Termination</h2>
+
+                <p>
+                    SGnG may suspend, restrict, or terminate access
+                    when reasonably necessary because of a material
+                    violation of these Terms, unlawful or fraudulent
+                    conduct, unauthorized system access, security
+                    risk, rights infringement, or protection of SGnG
+                    and its users.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>21. Changes to These Terms</h2>
+
+                <p>
+                    SGnG may revise these Terms as its Marketplace,
+                    technology, services, business practices, and
+                    applicable obligations evolve.
+                </p>
+
+                <p>
+                    When material revisions are made, SGnG will
+                    update the Last Updated date and provide
+                    additional notice when appropriate or required.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>22. Severability</h2>
+
+                <p>
+                    If a provision is determined to be invalid,
+                    unlawful, or unenforceable, that provision will
+                    be interpreted or limited to the extent permitted
+                    by law. The remaining provisions will continue
+                    in effect where legally permissible.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>23. No Waiver</h2>
+
+                <p>
+                    Failure to enforce a provision on one occasion
+                    does not automatically waive the right to enforce
+                    that provision in the future.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>24. Entire Agreement</h2>
+
+                <p>
+                    These Terms, policies expressly incorporated into
+                    them, and applicable transaction-specific terms
+                    constitute the agreement concerning the matters
+                    they address.
+                </p>
+            </section>
+
+            <section class="legal-section legal-page__contact">
+                <h2>25. Contact Information</h2>
+
+                <p>
+                    <strong>Strubell Publishing LLC</strong><br>
+                    d/b/a Strubell Goods &amp; Gear (SGnG)<br>
+                    Louisville, Kentucky, United States
+                </p>
+
+                <p>
+                    Questions may be submitted through the
+                    <a href="{% url 'contact:contact' %}">
+                        SGnG Contact page
+                    </a>.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>26. Acknowledgment</h2>
+
+                <p>
+                    By accessing or using SGnG services in
+                    circumstances where these Terms form part of the
+                    applicable agreement, the user acknowledges
+                    having had the opportunity to review these Terms.
+                </p>
+            </section>
+
         </div>
+
+        <nav
+            class="legal-page__back"
+            aria-label="Related legal information"
+        >
+            <a
+                class="button button--secondary"
+                href="{% url 'pages:privacy_policy' %}"
+            >
+                Review Privacy Policy
+            </a>
+
+            <a
+                class="button button--primary"
+                href="{% url 'pages:home' %}"
+            >
+                Return Home
+            </a>
+        </nav>
+
     </div>
 </section>
 {% endblock %}

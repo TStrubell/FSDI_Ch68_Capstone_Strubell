@@ -1,36 +1,331 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Privacy Policy | SGnG{% endblock %}
+{% block title %}
+    Privacy Policy | SGnG
+{% endblock %}
+
+{% block extra_css %}
+    <link
+        rel="stylesheet"
+        href="{% static 'css/legal.css' %}"
+    >
+{% endblock %}
 
 {% block content %}
 <section class="legal-page">
-    <div class="container">
+    <div class="legal-page__shell">
+
         <header class="legal-page__header">
             <p class="legal-page__eyebrow">
-                Strubell Goods & Gear
+                Strubell Goods &amp; Gear
             </p>
 
             <h1>Privacy Policy</h1>
 
-            <p>
-                Information about privacy and data handling
-                within the SGnG platform.
+            <p class="legal-page__summary">
+                This Privacy Policy explains how SGnG handles
+                information associated with its implemented website,
+                account, communication, and Marketplace features.
+            </p>
+
+            <p class="legal-page__dates">
+                <span>
+                    <strong>Effective Date:</strong>
+                    November 8, 2026
+                </span>
+
+                <span>
+                    <strong>Last Updated:</strong>
+                    November 8, 2026
+                </span>
+            </p>
+
+            <p class="legal-page__notice">
+                This Privacy Policy is maintained separately from
+                the SGnG Terms of Service so that privacy disclosures
+                can remain aligned with the application's actual data
+                practices.
             </p>
         </header>
 
         <div class="legal-page__content">
-            <h2>Our Privacy Commitment</h2>
 
-            <p>
-                This page provides privacy information for
-                Strubell Goods & Gear (SGnG).
-            </p>
+            <section class="legal-section">
+                <h2>1. Introduction</h2>
 
-            <p>
-                Additional privacy information will be published
-                here as the SGnG platform and its services develop.
-            </p>
+                <p>
+                    Strubell Goods &amp; Gear
+                    (<strong>SGnG</strong>), a DBA of Strubell
+                    Publishing LLC, respects the privacy of users who
+                    interact with the SGnG website and Marketplace.
+                </p>
+
+                <p>
+                    This Privacy Policy describes how information is
+                    handled in connection with SGnG's implemented
+                    website features and services.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>2. Information Users Provide</h2>
+
+                <p>
+                    Depending upon the application features used,
+                    users may provide information through:
+                </p>
+
+                <ul>
+                    <li>
+                        Account registration and authentication.
+                    </li>
+                    <li>
+                        Contact and customer-support forms.
+                    </li>
+                    <li>
+                        Marketplace or order-related interactions.
+                    </li>
+                    <li>
+                        Other application features that request
+                        user-provided information.
+                    </li>
+                </ul>
+
+                <p>
+                    SGnG intends to maintain this policy so that it
+                    corresponds with data actually collected through
+                    implemented functionality.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>3. How Information Is Used</h2>
+
+                <p>Information may be used to:</p>
+
+                <ul>
+                    <li>
+                        Provide requested website or Marketplace
+                        functionality.
+                    </li>
+                    <li>
+                        Create, authenticate, and maintain eligible
+                        user accounts.
+                    </li>
+                    <li>
+                        Receive and respond to user communications.
+                    </li>
+                    <li>
+                        Support available Marketplace interactions.
+                    </li>
+                    <li>
+                        Protect users, accounts, and application
+                        security.
+                    </li>
+                    <li>
+                        Maintain, troubleshoot, and improve application
+                        operation.
+                    </li>
+                    <li>
+                        Comply with applicable operational or legal
+                        requirements.
+                    </li>
+                </ul>
+            </section>
+
+            <section class="legal-section">
+                <h2>4. Accounts and Authentication</h2>
+
+                <p>
+                    When account functionality is used, SGnG may
+                    process information necessary to create,
+                    authenticate, maintain, and secure eligible user
+                    accounts.
+                </p>
+
+                <p>
+                    Users are responsible for maintaining the
+                    confidentiality of their credentials and should
+                    promptly report suspected unauthorized access.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>5. Contact and Customer Communications</h2>
+
+                <p>
+                    Information submitted through SGnG contact or
+                    customer-support functionality may be used to
+                    receive, process, and respond to the corresponding
+                    communication.
+                </p>
+
+                <p>
+                    Communications may be retained when reasonably
+                    necessary to respond, document the interaction,
+                    maintain security, or satisfy applicable
+                    operational requirements.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>6. Marketplace and Transaction Information</h2>
+
+                <p>
+                    Where Marketplace transaction functionality is
+                    available, SGnG may process information reasonably
+                    necessary to support an applicable transaction.
+                </p>
+
+                <p>
+                    Production payment-processing relationships and
+                    corresponding privacy practices will be documented
+                    when a provider is selected and implemented.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>7. Cookies and Technical Information</h2>
+
+                <p>
+                    SGnG may use technical functionality required to
+                    operate the application, including session-related
+                    technologies supporting security, authentication,
+                    and application behavior.
+                </p>
+
+                <p>
+                    SGnG does not represent through this policy that
+                    optional advertising, analytics, or tracking
+                    technologies are in use unless those technologies
+                    are actually implemented.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>8. Third-Party Services</h2>
+
+                <p>
+                    SGnG may rely upon or link to services operated by
+                    third parties. Applicable providers may maintain
+                    separate terms, privacy practices, and security
+                    requirements.
+                </p>
+
+                <p>
+                    Relevant providers will be identified as SGnG's
+                    production architecture and integrations are
+                    finalized.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>9. Information Security</h2>
+
+                <p>
+                    SGnG uses reasonable technical and organizational
+                    measures appropriate to the application to help
+                    protect information under its control.
+                </p>
+
+                <p>
+                    No Internet-connected system can guarantee
+                    absolute security. Users should maintain secure
+                    credentials and devices and should report
+                    suspected account compromise.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>10. Information Retention</h2>
+
+                <p>
+                    SGnG intends to retain information for periods
+                    appropriate to the purpose for which it was
+                    processed and applicable operational or legal
+                    requirements.
+                </p>
+
+                <p>
+                    More specific production retention practices will
+                    be documented as SGnG's operational procedures are
+                    finalized.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>11. Privacy Choices and Rights</h2>
+
+                <p>
+                    Users may contact SGnG concerning applicable
+                    privacy questions, account information, or
+                    privacy choices.
+                </p>
+
+                <p>
+                    Additional rights or procedures may apply
+                    depending upon applicable law, the user's
+                    location, and the nature of the information
+                    involved.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h2>12. Changes to This Privacy Policy</h2>
+
+                <p>
+                    SGnG may revise this Privacy Policy when its
+                    Marketplace functionality, data practices,
+                    technologies, providers, or applicable obligations
+                    change.
+                </p>
+
+                <p>
+                    When material revisions are made, SGnG will update
+                    the Last Updated date and provide additional
+                    notice when appropriate or required.
+                </p>
+            </section>
+
+            <section class="legal-section legal-page__contact">
+                <h2>13. Contact SGnG</h2>
+
+                <p>
+                    <strong>Strubell Publishing LLC</strong><br>
+                    d/b/a Strubell Goods &amp; Gear (SGnG)<br>
+                    Louisville, Kentucky, United States
+                </p>
+
+                <p>
+                    Privacy questions may be submitted through the
+                    <a href="{% url 'contact:contact' %}">
+                        SGnG Contact page
+                    </a>.
+                </p>
+            </section>
+
         </div>
+
+        <nav
+            class="legal-page__back"
+            aria-label="Related legal information"
+        >
+            <a
+                class="button button--secondary"
+                href="{% url 'pages:terms_of_service' %}"
+            >
+                Review Terms of Service
+            </a>
+
+            <a
+                class="button button--primary"
+                href="{% url 'pages:home' %}"
+            >
+                Return Home
+            </a>
+        </nav>
+
     </div>
 </section>
 {% endblock %}
