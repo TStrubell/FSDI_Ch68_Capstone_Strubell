@@ -235,33 +235,6 @@
         center;
 }
 
-.about-intro__avatar {
-    width:
-        min(100%, 22rem);
-
-    aspect-ratio:
-        1 / 1;
-
-    margin-inline:
-        auto;
-
-    object-fit:
-        cover;
-
-    border:
-        2px solid
-        var(--color-gold);
-
-    border-radius:
-        50%;
-
-    background:
-        var(--color-surface);
-
-    box-shadow:
-        var(--shadow-large);
-}
-
 .about-intro__portrait figcaption {
     max-width:
         22rem;
@@ -714,11 +687,6 @@
             minmax(13rem, 0.5fr);
     }
 
-    .about-intro__avatar {
-        width:
-            min(100%, 17rem);
-    }
-
     .story-grid {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
@@ -763,14 +731,6 @@
 
         text-align:
             left;
-    }
-
-    .about-intro__avatar {
-        width:
-            min(68vw, 15rem);
-
-        margin-inline:
-            0;
     }
 
     .about-intro__portrait figcaption {

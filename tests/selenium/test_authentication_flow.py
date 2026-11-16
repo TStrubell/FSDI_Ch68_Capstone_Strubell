@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -11,52 +10,98 @@ User = get_user_model()
 
 class AuthenticationFlowTests(SeleniumTestCase):
     """
-    Browser-level tests for Register, Login, and Logout.
+    Browser-level tests for SGnG user registration, login,
+    and logout workflows.
     """
 
+    TEST_PASSWORD = "SecureTestPassword123!"
+
+    REGISTER_SUBMIT = (
+        By.CSS_SELECTOR,
+        'button[type="submit"]',
+    )
+
+    LOGIN_SUBMIT = (
+        By.CSS_SELECTOR,
+        'button[type="submit"]',
+    )
+
+    LOGOUT_BUTTON = (
+        By.CSS_SELECTOR,
+        ".nav-logout-button",
+    )
+
+    LOGIN_LINK = (
+        By.CSS_SELECTOR,
+        'a[href="/accounts/login/"]',
+    )
+
     def test_user_registration(self):
+        """
+        Verify that a visitor can submit a valid registration form,
+        create a Django user record, and reach the login page.
+        """
         self.open("/accounts/register/")
 
-        username = self.browser.find_element(
-            By.NAME,
-            "username",
+        username_field = self.wait.until(
+            EC.visibility_of_element_located(
+                (
+                    By.NAME,
+                    "username",
+                )
+            )
         )
 
-        email = self.browser.find_element(
-            By.NAME,
-            "email",
+        email_field = self.wait.until(
+            EC.visibility_of_element_located(
+                (
+                    By.NAME,
+                    "email",
+                )
+            )
         )
 
-        password1 = self.browser.find_element(
-            By.NAME,
-            "password1",
+        password1_field = self.wait.until(
+            EC.visibility_of_element_located(
+                (
+                    By.NAME,
+                    "password1",
+                )
+            )
         )
 
-        password2 = self.browser.find_element(
-            By.NAME,
-            "password2",
+        password2_field = self.wait.until(
+            EC.visibility_of_element_located(
+                (
+                    By.NAME,
+                    "password2",
+                )
+            )
         )
 
-        username.send_keys(
+        username_field.clear()
+        username_field.send_keys(
             "seleniumuser"
         )
 
-        email.send_keys(
+        email_field.clear()
+        email_field.send_keys(
             "selenium@example.com"
         )
 
-        password1.send_keys(
-            "SecureTestPassword123!"
+        password1_field.clear()
+        password1_field.send_keys(
+            self.TEST_PASSWORD
         )
 
-        password2.send_keys(
-            "SecureTestPassword123!"
+        password2_field.clear()
+        password2_field.send_keys(
+            self.TEST_PASSWORD
         )
 
-        self.browser.find_element(
-            By.CSS_SELECTOR,
-            'button[type="submit"]',
-        ).click()
+        self.safe_click(
+            self.REGISTER_SUBMIT
+        )
 
         self.wait.until(
             EC.url_contains(
@@ -64,44 +109,70 @@ class AuthenticationFlowTests(SeleniumTestCase):
             )
         )
 
+        self.wait_for_document_ready()
+
         self.assertTrue(
             User.objects.filter(
                 username="seleniumuser"
             ).exists()
         )
 
-
     def test_user_login(self):
+        """
+        Verify that a registered user can log in successfully
+        and reach the SGnG Home page.
+        """
         User.objects.create_user(
             username="testcustomer",
             email="customer@example.com",
-            password="SecureTestPassword123!",
+            password=self.TEST_PASSWORD,
         )
 
         self.open("/accounts/login/")
 
-        self.browser.find_element(
-            By.NAME,
-            "username",
-        ).send_keys(
+        username_field = self.wait.until(
+            EC.visibility_of_element_located(
+                (
+                    By.NAME,
+                    "username",
+                )
+            )
+        )
+
+        password_field = self.wait.until(
+            EC.visibility_of_element_located(
+                (
+                    By.NAME,
+                    "password",
+                )
+            )
+        )
+
+        username_field.clear()
+        username_field.send_keys(
             "testcustomer"
         )
 
-        self.browser.find_element(
-            By.NAME,
-            "password",
-        ).send_keys(
-            "SecureTestPassword123!"
+        password_field.clear()
+        password_field.send_keys(
+            self.TEST_PASSWORD
         )
 
-        self.browser.find_element(
-            By.CSS_SELECTOR,
-            'button[type="submit"]',
-        ).click()
+        self.safe_click(
+            self.LOGIN_SUBMIT
+        )
 
         self.wait.until(
             EC.url_to_be(
                 f"{self.live_server_url}/"
+            )
+        )
+
+        self.wait_for_document_ready()
+
+        self.wait.until(
+            EC.visibility_of_element_located(
+                self.LOGOUT_BUTTON
             )
         )
 
@@ -109,45 +180,50 @@ class AuthenticationFlowTests(SeleniumTestCase):
             "Logout"
         )
 
-
     def test_user_logout(self):
+        """
+        Verify that an authenticated user can log out and that
+        the navigation returns to its anonymous-user state.
+        """
         User.objects.create_user(
             username="logoutuser",
             email="logout@example.com",
-            password="SecureTestPassword123!",
+            password=self.TEST_PASSWORD,
         )
 
         self.open("/accounts/login/")
 
-        self.browser.find_element(
-            By.NAME,
-            "username",
-        ).send_keys(
-            "logoutuser"
-        )
-
-        self.browser.find_element(
-            By.NAME,
-            "password",
-        ).send_keys(
-            "SecureTestPassword123!"
-        )
-
-        self.browser.find_element(
-            By.CSS_SELECTOR,
-            'button[type="submit"]',
-        ).click()
-
-        logout_button = self.wait.until(
-            EC.element_to_be_clickable(
+        username_field = self.wait.until(
+            EC.visibility_of_element_located(
                 (
-                    By.CSS_SELECTOR,
-                    ".nav-logout-button",
+                    By.NAME,
+                    "username",
                 )
             )
         )
 
-        logout_button.click()
+        password_field = self.wait.until(
+            EC.visibility_of_element_located(
+                (
+                    By.NAME,
+                    "password",
+                )
+            )
+        )
+
+        username_field.clear()
+        username_field.send_keys(
+            "logoutuser"
+        )
+
+        password_field.clear()
+        password_field.send_keys(
+            self.TEST_PASSWORD
+        )
+
+        self.safe_click(
+            self.LOGIN_SUBMIT
+        )
 
         self.wait.until(
             EC.url_to_be(
@@ -155,21 +231,35 @@ class AuthenticationFlowTests(SeleniumTestCase):
             )
         )
 
+        self.wait_for_document_ready()
+
+        self.wait.until(
+            EC.visibility_of_element_located(
+                self.LOGOUT_BUTTON
+            )
+        )
+
+        self.safe_click(
+            self.LOGOUT_BUTTON
+        )
+
+        self.wait.until(
+            EC.url_to_be(
+                f"{self.live_server_url}/"
+            )
+        )
+
+        self.wait_for_document_ready()
+
         self.wait.until(
             EC.invisibility_of_element_located(
-                (
-                    By.CSS_SELECTOR,
-                    ".nav-logout-button",
-                )
+                self.LOGOUT_BUTTON
             )
         )
 
         login_link = self.wait.until(
             EC.visibility_of_element_located(
-                (
-                    By.CSS_SELECTOR,
-                    'a[href="/accounts/login/"]',
-                )
+                self.LOGIN_LINK
             )
         )
 
@@ -181,3 +271,4 @@ class AuthenticationFlowTests(SeleniumTestCase):
             login_link.text.strip(),
             "Login",
         )
+        

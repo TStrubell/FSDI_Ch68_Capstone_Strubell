@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Software Development | Strubell Goods & Gear
+{% endblock title %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <link
+        rel="stylesheet"
+        href="{% static 'css/about.css' %}"
+    >
+{% endblock extra_css %}
+
+{% block content %}
+<main class="about-detail">
+    <div class="about-container">
+        <header class="about-detail-header">
+            <p class="about-detail-kicker">
+                The SGnG Story
+            </p>
+
+            <h1 class="about-detail-title">
+                💻 Software Development
+            </h1>
+
+            <p class="about-detail-lead">
+                Full-stack software development provides the
+                technical foundation for the Cinematic SGnG
+                Marketplace and its continuing evolution.
+            </p>
+        </header>
+
+        <div class="about-detail-grid">
+            <section class="about-detail-panel">
+                <h2>Django Architecture</h2>
+
+                <p>
+                    Django coordinates URL routing, views,
+                    forms, templates, authentication,
+                    authorization, persistent data, and
+                    application-level workflows.
+                </p>
+            </section>
+
+            <section class="about-detail-panel">
+                <h2>Interface and Accessibility</h2>
+
+                <p>
+                    Responsive layouts, reusable components,
+                    semantic structure, keyboard interaction,
+                    and visible focus states support a more
+                    consistent experience.
+                </p>
+            </section>
+
+            <section class="about-detail-panel">
+                <h2>Testing and Verification</h2>
+
+                <p>
+                    Automated tests and manual verification help
+                    confirm routes, models, workflows,
+                    permissions, responsive behavior, and
+                    regression stability.
+                </p>
+            </section>
+
+            <section class="about-detail-panel">
+                <h2>Version Control and Iteration</h2>
+
+                <p>
+                    Git, GitHub, Trello, technical
+                    documentation, and iterative development
+                    preserve traceability between requirements,
+                    implementation, verification, and future
+                    work.
+                </p>
+            </section>
+        </div>
+
+        <nav
+            class="about-detail-actions"
+            aria-label="About-page navigation"
+        >
+            <a
+                class="about-detail-link"
+                href="{% url 'pages:about' %}"
+            >
+                ← Return to the SGnG Story
+            </a>
+        </nav>
+    </div>
+</main>
+{% endblock content %}

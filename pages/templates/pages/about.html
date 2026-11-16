@@ -1,30 +1,35 @@
 {% extends "base.html" %}
 {% load static %}
 
-
 {% block title %}
     About SGnG | Cinematic SGnG Marketplace
 {% endblock %}
 
-
 {% block extra_css %}
+    {{ block.super }}
+
     <link
         rel="stylesheet"
         href="{% static 'css/home.css' %}"
     >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/about.css' %}"
+    >
 {% endblock %}
 
-
 {% block content %}
-
 <section class="story-section">
-
     <div class="page-shell">
+
+        <!-- =====================================================
+             ABOUT INTRODUCTION / HERO
+             ===================================================== -->
 
         <div class="about-intro">
 
             <div class="about-intro__content">
-
                 <p class="eyebrow">
                     About Strubell Goods &amp; Gear
                 </p>
@@ -40,11 +45,9 @@
                     designed around useful products and honest
                     value.
                 </p>
-
             </div>
 
             <figure class="about-intro__portrait">
-
                 <img
                     class="about-intro__avatar"
                     src="{% static 'images/sgng_brand/avatar_tim_strubell.png' %}"
@@ -57,16 +60,28 @@
                     Founder, developer, and builder of the
                     Cinematic SGnG Marketplace
                 </figcaption>
-
             </figure>
 
         </div>
 
 
-        <div class="story-grid">
+        <!-- =====================================================
+             SGnG STORY PILLARS
+             Each complete card is keyboard-accessible and clickable.
+             ===================================================== -->
 
-            <article class="story-card">
+        <div
+            class="story-grid"
+            aria-label="Explore the foundations of Strubell Goods and Gear"
+        >
 
+            <!-- Military Service -->
+
+            <a
+                class="story-card story-card--link"
+                href="{% url 'pages:military_service' %}"
+                aria-label="Explore Military Service"
+            >
                 <span class="story-card__number">
                     01
                 </span>
@@ -81,11 +96,19 @@
                     reliability, and practical purpose.
                 </p>
 
-            </article>
+                <span class="story-card__action">
+                    Explore Military Service →
+                </span>
+            </a>
 
 
-            <article class="story-card">
+            <!-- Craftsmanship -->
 
+            <a
+                class="story-card story-card--link"
+                href="{% url 'pages:craftsmanship' %}"
+                aria-label="Explore Craftsmanship"
+            >
                 <span class="story-card__number">
                     02
                 </span>
@@ -96,16 +119,23 @@
 
                 <p>
                     Craftsmanship brings attention to useful
-                    design, durability, thoughtful
-                    construction, and the continued value of
-                    well-made goods.
+                    design, durability, thoughtful construction,
+                    and the continued value of well-made goods.
                 </p>
 
-            </article>
+                <span class="story-card__action">
+                    Explore Craftsmanship →
+                </span>
+            </a>
 
 
-            <article class="story-card">
+            <!-- Entrepreneurship -->
 
+            <a
+                class="story-card story-card--link"
+                href="{% url 'pages:entrepreneurship' %}"
+                aria-label="Explore Entrepreneurship"
+            >
                 <span class="story-card__number">
                     03
                 </span>
@@ -121,11 +151,19 @@
                     marketplace.
                 </p>
 
-            </article>
+                <span class="story-card__action">
+                    Explore Entrepreneurship →
+                </span>
+            </a>
 
 
-            <article class="story-card">
+            <!-- Software Development -->
 
+            <a
+                class="story-card story-card--link"
+                href="{% url 'pages:software_development' %}"
+                aria-label="Explore Software Development"
+            >
                 <span class="story-card__number">
                     04
                 </span>
@@ -142,13 +180,19 @@
                     administrative functionality.
                 </p>
 
-            </article>
+                <span class="story-card__action">
+                    Explore Software Development →
+                </span>
+            </a>
 
         </div>
 
 
-        <div class="home-hero__actions">
+        <!-- =====================================================
+             PAGE ACTIONS
+             ===================================================== -->
 
+        <div class="home-hero__actions">
             <a
                 class="button button--primary"
                 href="{% url 'catalog:product-list' %}"
@@ -162,11 +206,8 @@
             >
                 Return Home
             </a>
-
         </div>
 
     </div>
-
 </section>
-
 {% endblock %}

@@ -2,6 +2,9 @@
 __pycache__/
 *.py[cod]
 
+# PYTEST CACHE
+.pytest_cache/
+
 # VIRTUAL ENVIRONMENT
 .venv/
 v*nv/

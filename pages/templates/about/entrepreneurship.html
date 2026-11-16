@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Entrepreneurship | Strubell Goods & Gear
+{% endblock title %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <link
+        rel="stylesheet"
+        href="{% static 'css/about.css' %}"
+    >
+{% endblock extra_css %}
+
+{% block content %}
+<main class="about-detail">
+    <div class="about-container">
+        <header class="about-detail-header">
+            <p class="about-detail-kicker">
+                The SGnG Story
+            </p>
+
+            <h1 class="about-detail-title">
+                💼 Entrepreneurship
+            </h1>
+
+            <p class="about-detail-lead">
+                Entrepreneurship turns ideas into structured,
+                testable, and continuously improving solutions
+                built around practical customer value.
+            </p>
+        </header>
+
+        <div class="about-detail-grid">
+            <section class="about-detail-panel">
+                <h2>From Concept to Capability</h2>
+
+                <p>
+                    SGnG develops through defined requirements,
+                    controlled implementation, verification,
+                    documentation, and continued evaluation.
+                </p>
+            </section>
+
+            <section class="about-detail-panel">
+                <h2>Customer Value</h2>
+
+                <p>
+                    The SGnG concept emphasizes useful products,
+                    clear information, transparent value, and
+                    an interface designed to support informed
+                    decisions.
+                </p>
+            </section>
+
+            <section class="about-detail-panel">
+                <h2>Responsible Growth</h2>
+
+                <p>
+                    Responsible development requires separating
+                    implemented functionality from future
+                    commercial, operational, and production
+                    responsibilities.
+                </p>
+            </section>
+
+            <section class="about-detail-panel">
+                <h2>Continuous Improvement</h2>
+
+                <p>
+                    Feedback, testing, retrospective evaluation,
+                    and controlled scope help SGnG evolve
+                    without overstating unfinished capabilities.
+                </p>
+            </section>
+        </div>
+
+        <nav
+            class="about-detail-actions"
+            aria-label="About-page navigation"
+        >
+            <a
+                class="about-detail-link"
+                href="{% url 'pages:about' %}"
+            >
+                ← Return to the SGnG Story
+            </a>
+        </nav>
+    </div>
+</main>
+{% endblock content %}

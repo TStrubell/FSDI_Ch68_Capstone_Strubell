@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Craftsmanship | Strubell Goods & Gear
+{% endblock title %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <link
+        rel="stylesheet"
+        href="{% static 'css/about.css' %}"
+    >
+{% endblock extra_css %}
+
+{% block content %}
+<main class="about-detail">
+    <div class="about-container">
+        <header class="about-detail-header">
+            <p class="about-detail-kicker">
+                The SGnG Story
+            </p>
+
+            <h1 class="about-detail-title">
+                🧰 Craftsmanship
+            </h1>
+
+            <p class="about-detail-lead">
+                Craftsmanship connects quality, durability,
+                attention to detail, and purposeful construction
+                with the standards that shape Strubell Goods
+                &amp; Gear.
+            </p>
+        </header>
+
+        <div class="about-detail-grid">
+            <section class="about-detail-panel">
+                <h2>Materials and Construction</h2>
+
+                <p>
+                    The usefulness of a product depends on more
+                    than appearance. Materials, construction,
+                    intended use, and long-term value all
+                    contribute to a meaningful evaluation.
+                </p>
+            </section>
+
+            <section class="about-detail-panel">
+                <h2>Attention to Detail</h2>
+
+                <p>
+                    Small details influence usability,
+                    reliability, clarity, and the overall
+                    quality of both physical products and
+                    digital experiences.
+                </p>
+            </section>
+
+            <section class="about-detail-panel">
+                <h2>Purposeful Design</h2>
+
+                <p>
+                    Purposeful design avoids unnecessary
+                    complexity and focuses on whether a product
+                    or feature solves a practical problem.
+                </p>
+            </section>
+
+            <section class="about-detail-panel">
+                <h2>Connection to SGnG</h2>
+
+                <p>
+                    SGnG applies craftsmanship principles to
+                    product evaluation, interface design,
+                    documentation, testing, and the continuing
+                    development of the Marketplace.
+                </p>
+            </section>
+        </div>
+
+        <nav
+            class="about-detail-actions"
+            aria-label="About-page navigation"
+        >
+            <a
+                class="about-detail-link"
+                href="{% url 'pages:about' %}"
+            >
+                ← Return to the SGnG Story
+            </a>
+        </nav>
+    </div>
+</main>
+{% endblock content %}

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Military Service | Strubell Goods & Gear
+{% endblock title %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <link
+        rel="stylesheet"
+        href="{% static 'css/about.css' %}"
+    >
+{% endblock extra_css %}
+
+{% block content %}
+<main class="about-detail">
+    <div class="about-container">
+        <header class="about-detail-header">
+            <p class="about-detail-kicker">
+                The SGnG Story
+            </p>
+
+            <h1 class="about-detail-title">
+                🎖️ Military Service
+            </h1>
+
+            <p class="about-detail-lead">
+                Military service contributed principles of
+                leadership, accountability, preparation,
+                adaptability, and purposeful decision-making
+                to the foundation of Strubell Goods &amp; Gear.
+            </p>
+        </header>
+
+        <div class="about-detail-grid">
+            <section class="about-detail-panel">
+                <h2>Leadership and Accountability</h2>
+
+                <p>
+                    Effective leadership requires clear
+                    communication, responsibility, thoughtful
+                    planning, and accountability for results.
+                    Those principles continue to influence how
+                    SGnG requirements and responsibilities are
+                    evaluated.
+                </p>
+            </section>
+
+            <section class="about-detail-panel">
+                <h2>Preparation and Adaptability</h2>
+
+                <p>
+                    Preparation provides a foundation, while
+                    adaptability supports effective decisions
+                    when requirements, constraints, or operating
+                    conditions change.
+                </p>
+            </section>
+
+            <section class="about-detail-panel">
+                <h2>Problem Solving</h2>
+
+                <p>
+                    SGnG applies a practical approach to problem
+                    solving by identifying the requirement,
+                    evaluating available capabilities, managing
+                    risk, and verifying the resulting solution.
+                </p>
+            </section>
+
+            <section class="about-detail-panel">
+                <h2>Connection to SGnG</h2>
+
+                <p>
+                    The lessons associated with service inform
+                    SGnG's emphasis on useful products, honest
+                    value, controlled scope, documentation, and
+                    continuous improvement.
+                </p>
+            </section>
+        </div>
+
+        <nav
+            class="about-detail-actions"
+            aria-label="About-page navigation"
+        >
+            <a
+                class="about-detail-link"
+                href="{% url 'pages:about' %}"
+            >
+                ← Return to the SGnG Story
+            </a>
+        </nav>
+    </div>
+</main>
+{% endblock content %}

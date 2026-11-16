@@ -22,6 +22,21 @@ class HomeView(TemplateView):
 
         return context
 
+class MilitaryServiceView(TemplateView):
+    template_name = "about/military_service.html"
+
+
+class CraftsmanshipView(TemplateView):
+    template_name = "about/craftsmanship.html"
+
+
+class EntrepreneurshipView(TemplateView):
+    template_name = "about/entrepreneurship.html"
+
+
+class SoftwareDevelopmentView(TemplateView):
+    template_name = "about/software_development.html"
+
 
 class AboutView(TemplateView):
     template_name = "pages/about.html"

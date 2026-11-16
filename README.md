@@ -1,47 +1,96 @@
-# FSDI_Ch68_Capstone_Strubell
+# Cinematic Strubell Goods & Gear Marketplace
 
-## Cinematic Strubell Goods & Gear Marketplace
+**Repository:** `FSDI_Ch68_Capstone_Strubell`  
+**Project:** Cinematic SGnG Marketplace  
+**Academic Context:** FSDI Cohort 68 Capstone project  
+**Current Milestone:** FSDI-119 Assignment 4 Final Report
 
-A responsive Django capstone application for Strubell Goods & Gear (SGnG). The project combines a cinematic branded interface with authentication, a searchable product catalog, staff product management, a contact workflow, REST API support, automated Django tests, and Selenium end-to-end testing.
+## Project Overview
 
-## Project Status
+The **Cinematic Strubell Goods & Gear Marketplace** is a responsive full-stack Django application developed for Strubell Goods & Gear (SGnG). The project combines a cinematic branded interface with persistent Marketplace data, account workflows, protected product management, contact/email processing, legal-information pages, REST API support, responsive design, accessibility-aware interaction states, and automated Django and Selenium testing.
 
-- Core Django architecture implemented
-- Accounts and authentication implemented
-- Marketplace catalog and product-detail workflow implemented
-- Staff product create, update, and delete workflow implemented
-- Django REST Framework included
-- Responsive SGnG visual system implemented
-- Contact form validation implemented
-- Gmail SMTP delivery configuration documented below
-- Automated Django and Selenium tests included
-- Stripe SDK installed for future payment integration; checkout is not yet claimed as complete
+The project uses an integration-first approach. Existing Django architecture is retained when it satisfies the project requirement, while targeted enhancements are added when they improve maintainability, usability, verification, accessibility, or architectural clarity.
+
+## Current Implemented Features
+
+- Cinematic SGnG Home and About experiences
+- Dedicated About pages for:
+  - Military Service
+  - Craftsmanship
+  - Entrepreneurship
+  - Software Development
+- Clickable and keyboard-accessible About story cards
+- Responsive founder/avatar presentation
+- Persistent Category and Product data
+- Marketplace listing and Product Detail workflows
+- Product search and supported filtering
+- User registration, login, and logout
+- Authentication-aware navigation
+- Staff-protected Product create, update, and delete workflows
+- Django Admin support
+- Read-only Django REST Framework endpoints
+- Contact-form validation and configured email delivery
+- Standalone Terms of Service and Privacy Policy pages
+- Global legal-information footer navigation
+- Responsive desktop, tablet, and mobile layouts
+- Keyboard focus and accessibility-related interaction states
+- Django application tests and Selenium browser-flow tests
+- Git/GitHub version control and Trello project traceability
+
+## Intentionally Deferred or Future Scope
+
+The following items are not represented as completed functionality:
+
+- JavaScript destructive-action modal enhancement
+- Production payment/checkout implementation
+- Final shipping, warranty, return, and refund policies
+- Cookie consent/preference management
+- Production legal review
+- Performance metrics and user-behavior analytics
+- Optional multilingual and user-selectable theme systems
+
+The Stripe SDK is installed for possible future integration, but checkout is not claimed as implemented or verified.
 
 ## Technology Stack
 
 - Python
 - Django 6.1.2
 - Django REST Framework
-- HTML5, CSS3, and JavaScript
+- HTML5
+- CSS3
+- Vanilla JavaScript
 - SQLite for local development
-- PostgreSQL-ready configuration through `dj-database-url`
+- Environment-based database configuration through `dj-database-url`
 - Pillow for image handling
-- Selenium for browser-based tests
+- Selenium with Microsoft Edge for browser-level testing
 - Gunicorn and WhiteNoise for production preparation
-- Stripe Python SDK for planned payment functionality
+- Git and GitHub for version control
+- Trello for Agile planning and traceability
 
 ## Repository Structure
 
 ```text
 FSDI_Ch68_Capstone_Strubell/
-├── accounts/                 # Authentication and account workflows
-├── catalog/                  # Products, marketplace, staff CRUD, and API
-├── config/                   # Project settings and root URLs
-├── contact/                  # Contact form, view, template, and tests
-├── pages/                    # Homepage and general pages
-├── static/                   # CSS, JavaScript, images, branding, and favicon files
-├── templates/                # Shared project templates
-├── tests/                    # Selenium and cross-application tests
+├── accounts/                  # Registration, login, logout, account workflows
+├── catalog/                   # Products, Marketplace, staff CRUD, and API
+├── config/                    # Project settings and root URL configuration
+├── contact/                   # Contact form, email workflow, and tests
+├── media/                     # Development media files
+├── pages/                     # Home, About, legal, and About-detail pages
+│   ├── static/css/about.css
+│   ├── templates/about/
+│   │   ├── craftsmanship.html
+│   │   ├── entrepreneurship.html
+│   │   ├── military_service.html
+│   │   └── software_development.html
+│   └── templates/pages/
+│       ├── about.html
+│       ├── home.html
+│       ├── privacy_policy.html
+│       └── terms_of_service.html
+├── static/                    # Shared CSS, JavaScript, images, and branding
+├── templates/                 # Shared base template
+├── tests/selenium/            # End-to-end browser-flow tests
 ├── manage.py
 ├── requirements.txt
 ├── .env.example
@@ -76,7 +125,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 ```powershell
 py -m pip install --upgrade pip
-pip install -r requirements.txt
+py -m pip install -r requirements.txt
 ```
 
 ### 4. Create the local environment file
@@ -85,7 +134,7 @@ pip install -r requirements.txt
 Copy-Item .env.example .env
 ```
 
-Replace the placeholders in `.env` with your own development credentials. Never commit `.env`.
+Replace the placeholders in `.env` with private local-development values. Never commit `.env`.
 
 ### 5. Apply migrations
 
@@ -99,7 +148,7 @@ py manage.py migrate
 py manage.py createsuperuser
 ```
 
-### 7. Run the project
+### 7. Start the development server
 
 ```powershell
 py manage.py runserver
@@ -109,34 +158,13 @@ Open `http://127.0.0.1:8000/` in a browser.
 
 ## Environment Variables
 
-Use the following structure in the private `.env` file:
+Use safe placeholders in `.env.example` and private values in `.env`.
 
-```dotenv
+```text
 DEBUG=True
 SECRET_KEY=replace-with-a-unique-local-secret-key
 ALLOWED_HOSTS=127.0.0.1,localhost
 DATABASE_URL=sqlite:///db.sqlite3
-
-DEFAULT_FROM_EMAIL=your_gmail_address@gmail.com
-CONTACT_EMAIL=your_recipient_address@gmail.com
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-EMAIL_HOST_USER=your_gmail_address@gmail.com
-EMAIL_HOST_PASSWORD=your_16_character_google_app_password
-
-STRIPE_SECRET_KEY=sk_test_replace_with_your_test_secret_key
-STRIPE_PUBLIC_KEY=pk_test_replace_with_your_test_publishable_key
-```
-
-The committed `.env.example` must contain only safe placeholders:
-
-```dotenv
-DEBUG=True
-SECRET_KEY=replace-with-secret-key
-ALLOWED_HOSTS=127.0.0.1,localhost
-DATABASE_URL=sqlite:///db.sqlite3
-
 DEFAULT_FROM_EMAIL=your_email@example.com
 CONTACT_EMAIL=recipient@example.com
 EMAIL_HOST=smtp.gmail.com
@@ -144,81 +172,74 @@ EMAIL_PORT=587
 EMAIL_USE_TLS=True
 EMAIL_HOST_USER=your_email@example.com
 EMAIL_HOST_PASSWORD=replace-with-google-app-password
-
 STRIPE_SECRET_KEY=sk_test_replace-with-stripe-secret-key
 STRIPE_PUBLIC_KEY=pk_test_replace-with-stripe-public-key
 ```
 
-## Generate a Django Secret Key
-
-Run this command inside the activated virtual environment:
+Generate a local Django secret key with:
 
 ```powershell
 py -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 ```
 
-Copy the output into `SECRET_KEY` in `.env`. Do not post it publicly or commit it to GitHub.
+Do not post or commit the generated key.
 
-## Gmail SMTP Contact Delivery
+## Contact and Email Workflow
 
-The current contact form must call Django's mail API before displaying a success message. Gmail SMTP configuration alone does not send a message.
-
-1. Enable 2-Step Verification on the sending Google account.
-2. Create a Google App Password for the Django application.
-3. Put the Gmail address in `EMAIL_HOST_USER` and `DEFAULT_FROM_EMAIL`.
-4. Put the 16-character App Password in `EMAIL_HOST_PASSWORD`.
-5. Put the inbox that should receive contact messages in `CONTACT_EMAIL`.
-6. Load these variables in `config/settings.py`.
-7. Call `send_mail()` or `EmailMessage.send()` from the valid contact-form workflow.
-8. Display the success message only after the mail call succeeds.
-
-Do not use the normal Google account password and do not commit the App Password.
-
-## Contact Form Behavior
-
-A valid contact submission should:
+A valid Contact submission should:
 
 - validate the visitor's name, email, subject, and message;
 - send the formatted inquiry to `CONTACT_EMAIL`;
 - use `DEFAULT_FROM_EMAIL` as the authenticated sender;
-- use the visitor's address as `reply_to`, rather than spoofing the SMTP sender;
-- display a success message only after successful delivery;
-- preserve form errors when validation or delivery fails.
+- use the visitor's address as `reply_to`;
+- display success feedback only after successful processing; and
+- preserve clear validation feedback when input or delivery fails.
+
+Do not commit email passwords or Google App Passwords.
 
 ## Database Configuration
 
 Local development uses:
 
-```dotenv
+```text
 DATABASE_URL=sqlite:///db.sqlite3
 ```
 
-A production host normally supplies its own PostgreSQL connection URL, similar to:
+A deployment platform may provide a PostgreSQL connection URL. Use the exact value supplied by the selected platform and store it through private environment settings.
 
-```dotenv
-DATABASE_URL=postgresql://USER:PASSWORD@HOST:5432/DATABASE_NAME
-```
+## Testing and Verification
 
-Use the exact URL issued by the selected host. Do not invent production database credentials or commit them.
+Activate the virtual environment before running commands.
 
-## Stripe Configuration
-
-Create or select a Stripe sandbox and copy the test credentials from the Stripe Dashboard API keys area:
-
-- `STRIPE_PUBLIC_KEY` receives the publishable test key beginning with `pk_test_`.
-- `STRIPE_SECRET_KEY` receives the secret test key beginning with `sk_test_`.
-
-Never expose the secret key in HTML, JavaScript, screenshots, reports, or the repository. Installing the Stripe package does not by itself implement checkout.
-
-## Testing
-
-Run the complete Django test suite:
+### Configuration and migration checks
 
 ```powershell
-py manage.py test -v 2
+py manage.py check
+py manage.py makemigrations --check --dry-run
+py manage.py migrate
 ```
 
-Run application tests separately when troubleshooting:
+### About-page Selenium tests
+
+```powershell
+py manage.py test tests.selenium.test_about_pages -v 2
+```
+
+### Focused Selenium modules
+
+```powershell
+py manage.py test tests.selenium.test_authentication_flow -v 2
+py manage.py test tests.selenium.test_marketplace_flow -v 2
+py manage.py test tests.selenium.test_product_management_flow -v 2
+```
+
+### Complete Selenium suite
+
+```powershell
+py manage.py test tests.selenium -v 2
+```
+
+### Application suites
 
 ```powershell
 py manage.py test accounts -v 2
@@ -227,81 +248,107 @@ py manage.py test contact -v 2
 py manage.py test catalog -v 2
 ```
 
-Run the Selenium suite:
+### Complete regression suite
 
 ```powershell
-py manage.py test tests.selenium -v 2
+py manage.py test -v 2
 ```
 
-Test Gmail SMTP independently in the Django shell before testing the browser form:
+The test count and elapsed time used in the Final Report must come from the same final successful complete-regression run.
+
+## Static-File Verification
 
 ```powershell
-py manage.py shell
+py manage.py findstatic css/base.css
+py manage.py findstatic css/home.css
+py manage.py findstatic css/about.css
+py manage.py findstatic css/forms.css
+py manage.py findstatic css/legal.css
+py manage.py findstatic css/marketplace.css
 ```
 
-```python
-from django.conf import settings
-from django.core.mail import send_mail
+## Responsive and Accessibility Verification
 
-send_mail(
-    subject="SGnG SMTP test",
-    message="This is a Django SMTP delivery test.",
-    from_email=settings.DEFAULT_FROM_EMAIL,
-    recipient_list=[settings.CONTACT_EMAIL],
-    fail_silently=False,
-)
-```
+Manually verify representative layouts at:
 
-A return value of `1` means the email backend accepted one message for sending. Also check Inbox, Spam, and the sending account's Sent folder.
+- Desktop: 1440 × 900
+- Tablet: 768 × 1024
+- Mobile: 390 × 844
 
-## Dependency Notes
+Also verify:
 
-The project currently uses `python-dotenv`, so `django-environ` is not required unless the project deliberately migrates to that package. Avoid maintaining two `.env` loaders.
-
-`django-crispy-forms` and `crispy-bootstrap5` are optional. Add them only if the templates are changed to render forms through crispy tags and the corresponding applications are added to `INSTALLED_APPS`. The current SGnG contact template uses custom markup and `forms.css`, so crispy forms are not required for that layout.
+- keyboard navigation with Tab and Shift+Tab;
+- activation with Enter where applicable;
+- visible `:focus-visible` styling;
+- readable headings and text;
+- usable forms and validation messages;
+- no unintended horizontal scrolling; and
+- functional About-page cards and return links.
 
 ## Security and Production Checklist
 
-Before deployment:
+Before production deployment:
 
 - set `DEBUG=False`;
-- create a unique production `SECRET_KEY`;
-- configure the production hostname in `ALLOWED_HOSTS`;
-- use the production database URL supplied by the host;
-- store all secrets in the hosting platform's environment settings;
-- configure static-file collection and serving;
+- use a unique production `SECRET_KEY`;
+- configure production `ALLOWED_HOSTS`;
+- use the database URL supplied by the deployment platform;
+- keep all secrets in private environment settings;
 - run `py manage.py collectstatic --noinput`;
 - run `py manage.py check --deploy`;
 - run the complete automated test suite;
-- use test Stripe keys until payment functionality has been intentionally implemented and verified.
+- use test Stripe keys until payment functionality is deliberately implemented and verified; and
+- complete appropriate legal and policy review.
 
-## Git Workflow
+## Final Git Workflow
+
+Before staging changes:
 
 ```powershell
 git status
+git check-ignore .env
+git diff --stat
+git diff
+```
+
+Stage and review:
+
+```powershell
 git add .
-git commit -m "Configure environment-based email delivery and project documentation"
+git status
+git diff --cached --stat
+git diff --cached
+```
+
+Commit and push:
+
+```powershell
+git commit -m "Finalize FSDI-119 Assignment 4 implementation and documentation"
 git push origin main
 ```
 
-Before every push, verify that `.env` remains ignored:
+Final checkpoint evidence:
 
 ```powershell
-git check-ignore .env
+cls
+git branch --show-current
+git log -1 --oneline
+git push origin main
+git status
 ```
 
-The expected output is `.env`.
+The final terminal evidence should show the active `main` branch, the latest commit, successful remote synchronization, and `nothing to commit, working tree clean`.
 
 ## Academic Context
 
-This repository is the capstone project for FSDI Cohort 68 and supports work across FSDI 118-120. It demonstrates planning, architecture, implementation, responsive UX, validation, testing, API development, security preparation, and deployment readiness.
+This repository supports the FSDI Capstone sequence and documents planning, architecture, implementation, persistence, authentication, communication, API integration, responsive UX, accessibility, testing, Agile traceability, and controlled scope.
 
 ## Author
 
-Timothy O. Strubell  
+**Timothy O. Strubell**  
 Strubell Publishing LLC  
 Strubell Goods & Gear (SGnG)
 
 ## License
 
-This academic capstone repository does not currently declare an open-source license. Unless a license is added, all rights remain reserved.
+This academic Capstone repository does not currently declare an open-source license. Unless a license is added, all rights remain reserved.
