@@ -230,3 +230,40 @@ class Product(models.Model):
             )
 
         return Decimal("0.00")
+
+    @property
+    def marketplace_static_image(self):
+        """
+        Return the bundled static image path for each of the
+        five final SGnG Marketplace products.
+
+        Dictionary keys must exactly match Product.name values
+        stored in the database.
+        """
+        image_map = {
+            "Compact Outdoor Multi-Tool": (
+                "images/marketplace/"
+                "SGnG_Compact_Outdoor_Multi-Tool.png"
+            ),
+            "Handcrafted Leather Utility Pouch": (
+                "images/marketplace/"
+                "SGnG_Handcrafted_Leather_Utility_Pouch.png"
+            ),
+            "SGnG Trail Backpack": (
+                "images/marketplace/"
+                "SGnG_Trail_Backpack.png"
+            ),
+            "SGnG Adventure Field Shirt": (
+                "images/marketplace/"
+                "SGnG_Adventure_Field_Shirt.png"
+            ),
+            "Insulated Trail Bottle": (
+                "images/marketplace/"
+                "SGnG_Insulated_Trail_Bottle.png"
+            ),
+        }
+
+        return image_map.get(
+            self.name.strip(),
+            "",
+        )

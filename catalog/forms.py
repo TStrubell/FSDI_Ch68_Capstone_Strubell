@@ -221,3 +221,50 @@ class ProductForm(forms.ModelForm):
             )
 
         return cleaned_data
+
+class CategoryForm(forms.ModelForm):
+    """Staff form used to create and update SGnG categories."""
+
+    class Meta:
+        model = Category
+        fields = (
+            "name",
+            "description",
+            "active",
+        )
+        widgets = {
+            "name": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Category name",
+                    "autocomplete": "off",
+                }
+            ),
+            "description": forms.Textarea(
+                attrs={
+                    "class": "form-control",
+                    "rows": 5,
+                    "placeholder": (
+                        "Describe the products represented "
+                        "by this category."
+                    ),
+                }
+            ),
+            "active": forms.CheckboxInput(
+                attrs={
+                    "class": "form-checkbox",
+                }
+            ),
+        }
+        help_texts = {
+            "name": (
+                "Enter a unique customer-facing Category name."
+            ),
+            "description": (
+                "Provide a concise description of the Category."
+            ),
+            "active": (
+                "Inactive Categories and their Products are hidden "
+                "from the public Marketplace."
+            ),
+        }

@@ -4,7 +4,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from django.contrib.messages.views import SuccessMessageMixin
 
-from django.db.models import Q
+from django.db.models import Q, Count
+
+from django.db.models.deletion import ProtectedError
 
 from django.urls import reverse_lazy
 
@@ -16,7 +18,7 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .forms import ProductForm
+from .forms import CategoryForm, ProductForm
 
 from .models import Category, Product
 
@@ -258,6 +260,108 @@ class StaffRequiredMixin(
             user.is_authenticated
             and user.is_staff
         )
+
+
+# =========================================================
+# STAFF CATEGORY MANAGEMENT
+# =========================================================
+
+
+class CategoryManagementView(
+    StaffRequiredMixin,
+    ListView,
+):
+    """Staff-facing SGnG Category Management page."""
+
+    model = Category
+    template_name = "catalog/category_management.html"
+    context_object_name = "categories"
+
+    def get_queryset(self):
+        return (
+            Category.objects
+            .annotate(product_count=Count("products"))
+            .order_by("name")
+        )
+
+
+class CategoryCreateView(
+    StaffRequiredMixin,
+    SuccessMessageMixin,
+    CreateView,
+):
+    """Create an SGnG Marketplace Category."""
+
+    model = Category
+    form_class = CategoryForm
+    template_name = "catalog/category_form.html"
+    success_url = reverse_lazy(
+        "catalog:category-management"
+    )
+    success_message = (
+        "Category created successfully."
+    )
+
+
+class CategoryUpdateView(
+    StaffRequiredMixin,
+    SuccessMessageMixin,
+    UpdateView,
+):
+    """Update an SGnG Marketplace Category."""
+
+    model = Category
+    form_class = CategoryForm
+    template_name = "catalog/category_form.html"
+    context_object_name = "category"
+    success_url = reverse_lazy(
+        "catalog:category-management"
+    )
+    success_message = (
+        "Category updated successfully."
+    )
+
+
+class CategoryDeleteView(
+    StaffRequiredMixin,
+    DeleteView,
+):
+    """Delete an unused Category after confirmation."""
+
+    model = Category
+    template_name = (
+        "catalog/category_confirm_delete.html"
+    )
+    context_object_name = "category"
+    success_url = reverse_lazy(
+        "catalog:category-management"
+    )
+
+    def form_valid(self, form):
+        category_name = self.object.name
+
+        try:
+            response = super().form_valid(form)
+        except ProtectedError:
+            messages.error(
+                self.request,
+                (
+                    f"{category_name} cannot be deleted because "
+                    "one or more Products use this Category. "
+                    "Reassign or remove those Products first."
+                ),
+            )
+            return self.render_to_response(
+                self.get_context_data(form=form)
+            )
+
+        messages.success(
+            self.request,
+            (
+                f"{category_name} was deleted successfully."
+            ),
+        )
+        return response
 
 
 # =========================================================

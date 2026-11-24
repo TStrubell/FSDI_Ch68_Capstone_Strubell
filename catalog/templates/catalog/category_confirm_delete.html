@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Delete Category | SGnG Staff
+{% endblock %}
+
+{% block extra_css %}
+    <link
+        rel="stylesheet"
+        href="{% static 'css/forms.css' %}"
+    >
+{% endblock %}
+
+{% block content %}
+<section class="form-page">
+    <div class="page-shell">
+
+        <p class="eyebrow">
+            Staff / Administration
+        </p>
+
+        <h1>
+            Delete Category
+        </h1>
+
+        <p>
+            You are preparing to delete
+            <strong>{{ category.name }}</strong>.
+        </p>
+
+        {% if category.products.exists %}
+            <p class="form-error">
+                This Category cannot be deleted because
+                one or more Products currently use it.
+                Reassign or remove those Products first.
+            </p>
+
+            <a
+                class="button button--secondary"
+                href="{% url 'catalog:category-management' %}"
+            >
+                Return to Category Management
+            </a>
+        {% else %}
+            <form method="post">
+                {% csrf_token %}
+
+                <button
+                    class="button button--danger"
+                    type="submit"
+                >
+                    Permanently Delete Category
+                </button>
+
+                <a
+                    class="button button--secondary"
+                    href="{% url 'catalog:category-management' %}"
+                >
+                    Cancel
+                </a>
+            </form>
+        {% endif %}
+
+    </div>
+</section>
+{% endblock %}

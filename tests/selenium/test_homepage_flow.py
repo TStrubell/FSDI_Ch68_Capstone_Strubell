@@ -1,9 +1,6 @@
 from django.urls import reverse
-
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import (
-    expected_conditions as EC,
-)
+from selenium.webdriver.support import expected_conditions as EC
 
 from .base import SeleniumTestCase
 
@@ -12,6 +9,46 @@ class HomepageFlowTests(SeleniumTestCase):
     """
     Browser-level tests for the Cinematic SGnG homepage.
     """
+
+    HERO_LOCATOR = (
+        By.CSS_SELECTOR,
+        ".home-hero",
+    )
+
+    HERO_TITLE_LOCATOR = (
+        By.CSS_SELECTOR,
+        ".home-hero__title",
+    )
+
+    HERO_LOGO_LOCATOR = (
+        By.CSS_SELECTOR,
+        ".home-hero__logo",
+    )
+
+    STORY_SECTION_LOCATOR = (
+        By.ID,
+        "sgng-story",
+    )
+
+    MARKETPLACE_LINK_LOCATOR = (
+        By.CSS_SELECTOR,
+        ".home-hero__actions .button--primary",
+    )
+
+    HERO_LAYOUT_LOCATOR = (
+        By.CSS_SELECTOR,
+        ".home-hero__layout",
+    )
+
+    HERO_BRAND_VISUAL_LOCATOR = (
+        By.CSS_SELECTOR,
+        ".home-hero__brand-visual",
+    )
+
+    SECONDARY_ACTION_LOCATOR = (
+        By.CSS_SELECTOR,
+        ".home-hero__actions .button--secondary",
+    )
 
     def test_homepage_presents_brand_story_and_marketplace_path(
         self,
@@ -26,10 +63,7 @@ class HomepageFlowTests(SeleniumTestCase):
 
         hero = self.wait.until(
             EC.visibility_of_element_located(
-                (
-                    By.CSS_SELECTOR,
-                    ".home-hero",
-                )
+                self.HERO_LOCATOR
             )
         )
 
@@ -37,10 +71,9 @@ class HomepageFlowTests(SeleniumTestCase):
             hero
         )
 
-        heading = (
-            self.browser.find_element(
-                By.CSS_SELECTOR,
-                ".home-hero__title",
+        heading = self.wait.until(
+            EC.visibility_of_element_located(
+                self.HERO_TITLE_LOCATOR
             )
         )
 
@@ -54,10 +87,9 @@ class HomepageFlowTests(SeleniumTestCase):
             heading.text,
         )
 
-        logo = (
-            self.browser.find_element(
-                By.CSS_SELECTOR,
-                ".home-hero__logo",
+        logo = self.wait.until(
+            EC.visibility_of_element_located(
+                self.HERO_LOGO_LOCATOR
             )
         )
 
@@ -65,13 +97,11 @@ class HomepageFlowTests(SeleniumTestCase):
             logo.is_displayed()
         )
 
-        natural_width = (
-            self.browser.execute_script(
-                """
-                return arguments[0].naturalWidth;
-                """,
-                logo,
-            )
+        natural_width = self.browser.execute_script(
+            """
+            return arguments[0].naturalWidth;
+            """,
+            logo,
         )
 
         self.assertGreater(
@@ -79,10 +109,9 @@ class HomepageFlowTests(SeleniumTestCase):
             0,
         )
 
-        story_section = (
-            self.browser.find_element(
-                By.ID,
-                "sgng-story",
+        story_section = self.wait.until(
+            EC.presence_of_element_located(
+                self.STORY_SECTION_LOCATOR
             )
         )
 
@@ -90,30 +119,24 @@ class HomepageFlowTests(SeleniumTestCase):
             story_section
         )
 
-        marketplace_link = (
-            self.browser.find_element(
-                By.CSS_SELECTOR,
-                (
-                    ".home-hero__actions "
-                    ".button--primary"
-                ),
-            )
+        self.safe_click(
+            self.MARKETPLACE_LINK_LOCATOR
         )
 
-        marketplace_link.click()
+        expected_path = reverse(
+            "catalog:product-list"
+        )
 
         self.wait.until(
             EC.url_contains(
-                reverse(
-                    "catalog:product-list"
-                )
+                expected_path
             )
         )
 
+        self.wait_for_document_ready()
+
         self.assertIn(
-            reverse(
-                "catalog:product-list"
-            ),
+            expected_path,
             self.browser.current_url,
         )
 
@@ -135,22 +158,17 @@ class HomepageFlowTests(SeleniumTestCase):
 
         hero_layout = self.wait.until(
             EC.visibility_of_element_located(
-                (
-                    By.CSS_SELECTOR,
-                    ".home-hero__layout",
-                )
+                self.HERO_LAYOUT_LOCATOR
             )
         )
 
-        columns = (
-            self.browser.execute_script(
-                """
-                return window.getComputedStyle(
-                    arguments[0]
-                ).gridTemplateColumns;
-                """,
-                hero_layout,
-            )
+        columns = self.browser.execute_script(
+            """
+            return window.getComputedStyle(
+                arguments[0]
+            ).gridTemplateColumns;
+            """,
+            hero_layout,
         )
 
         self.assertEqual(
@@ -160,16 +178,14 @@ class HomepageFlowTests(SeleniumTestCase):
 
         logo = self.wait.until(
             EC.presence_of_element_located(
-                (
-                    By.CSS_SELECTOR,
-                    ".home-hero__logo",
-                )
+                self.HERO_LOGO_LOCATOR
             )
         )
 
-        logo_wrapper = self.browser.find_element(
-            By.CSS_SELECTOR,
-            ".home-hero__brand-visual",
+        logo_wrapper = self.wait.until(
+            EC.presence_of_element_located(
+                self.HERO_BRAND_VISUAL_LOCATOR
+            )
         )
 
         self.browser.execute_script(
@@ -189,30 +205,18 @@ class HomepageFlowTests(SeleniumTestCase):
             logo.is_displayed()
         )
 
-        primary_action = (
-            self.browser.find_element(
-                By.CSS_SELECTOR,
-                (
-                    ".home-hero__actions "
-                    ".button--primary"
-                ),
+        primary_action = self.wait.until(
+            EC.presence_of_element_located(
+                self.MARKETPLACE_LINK_LOCATOR
             )
         )
 
-        secondary_action = (
-            self.browser.find_element(
-                By.CSS_SELECTOR,
-                (
-                    ".home-hero__actions "
-                    ".button--secondary"
-                ),
+        secondary_action = self.wait.until(
+            EC.presence_of_element_located(
+                self.SECONDARY_ACTION_LOCATOR
             )
         )
 
-        # The mobile hero intentionally stacks the SGnG logo,
-        # headline, summary, and actions vertically. Scroll the
-        # action area into the viewport before checking whether
-        # the controls are visible and usable.
         self.browser.execute_script(
             """
             arguments[0].scrollIntoView({
@@ -224,8 +228,14 @@ class HomepageFlowTests(SeleniumTestCase):
         )
 
         self.wait.until(
-            EC.visibility_of(
-                primary_action
+            EC.visibility_of_element_located(
+                self.MARKETPLACE_LINK_LOCATOR
+            )
+        )
+
+        self.wait.until(
+            EC.visibility_of_element_located(
+                self.SECONDARY_ACTION_LOCATOR
             )
         )
 
@@ -237,26 +247,22 @@ class HomepageFlowTests(SeleniumTestCase):
             secondary_action.is_displayed()
         )
 
-        primary_width = (
-            self.browser.execute_script(
-                """
-                return arguments[0]
-                    .getBoundingClientRect()
-                    .width;
-                """,
-                primary_action,
-            )
+        primary_width = self.browser.execute_script(
+            """
+            return arguments[0]
+                .getBoundingClientRect()
+                .width;
+            """,
+            primary_action,
         )
 
-        secondary_width = (
-            self.browser.execute_script(
-                """
-                return arguments[0]
-                    .getBoundingClientRect()
-                    .width;
-                """,
-                secondary_action,
-            )
+        secondary_width = self.browser.execute_script(
+            """
+            return arguments[0]
+                .getBoundingClientRect()
+                .width;
+            """,
+            secondary_action,
         )
 
         self.assertGreater(
@@ -268,7 +274,6 @@ class HomepageFlowTests(SeleniumTestCase):
             secondary_width,
             0,
         )
-
 
     def tearDown(self):
         self.browser.maximize_window()

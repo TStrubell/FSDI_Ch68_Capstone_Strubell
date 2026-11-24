@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Category Management | SGnG Staff
+{% endblock %}
+
+{% block extra_css %}
+    <link
+        rel="stylesheet"
+        href="{% static 'css/forms.css' %}"
+    >
+    <link
+        rel="stylesheet"
+        href="{% static 'css/admin.css' %}"
+    >
+{% endblock %}
+
+{% block content %}
+<section class="staff-page">
+    <div class="page-shell">
+
+        <header class="staff-header">
+            <div>
+                <p class="eyebrow">
+                    Staff / Administration
+                </p>
+
+                <h1>
+                    Category Management
+                </h1>
+
+                <p class="staff-header__summary">
+                    Organize the SGnG Marketplace through
+                    protected Category creation, editing,
+                    status management, and deletion controls.
+                </p>
+            </div>
+
+            <div class="staff-header__actions">
+                <a
+                    class="button button--primary"
+                    href="{% url 'catalog:category-create' %}"
+                >
+                    + Create Category
+                </a>
+
+                <a
+                    class="button button--secondary"
+                    href="{% url 'catalog:product-management' %}"
+                >
+                    Product Management
+                </a>
+            </div>
+        </header>
+
+        <div class="staff-table-wrapper">
+            <table class="staff-table category-management-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Slug</th>
+                        <th>Products</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <td data-label="Category">
+                                <strong>
+                                    {{ category.display_name }}
+                                </strong>
+
+                                {% if category.description %}
+                                    <p class="category-description">
+                                        {{ category.description|truncatewords:16 }}
+                                    </p>
+                                {% endif %}
+                            </td>
+
+                            <td data-label="Slug">
+                                <span class="category-slug">
+                                    {{ category.slug }}
+                                </span>
+                            </td>
+
+                            <td data-label="Products">
+                                <span class="category-count">
+                                    {{ category.product_count }}
+                                </span>
+                            </td>
+
+                            <td data-label="Status">
+                                {% if category.active %}
+                                    <span
+                                        class="
+                                            staff-status
+                                            staff-status--active
+                                        "
+                                    >
+                                        Active
+                                    </span>
+                                {% else %}
+                                    <span
+                                        class="
+                                            staff-status
+                                            staff-status--inactive
+                                        "
+                                    >
+                                        Inactive
+                                    </span>
+                                {% endif %}
+                            </td>
+
+                            <td
+                                class="staff-actions"
+                                data-label="Actions"
+                            >
+                                <a
+                                    href="{% url 'catalog:category-update' category.pk %}"
+                                >
+                                    Edit
+                                </a>
+
+                                <a
+                                    class="staff-danger"
+                                    href="{% url 'catalog:category-delete' category.pk %}"
+                                >
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5">
+                                No Categories have been created.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
